@@ -22,13 +22,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/fairy_light.jpg
     - assets/images/skateboard.jpg
     - assets/images/sound_card.jpg
     - assets/images/vintage_sound_system.jpg
     - assets/images/led_dance_floor.jpg
     - assets/images/yacht.jpg
-    - assets/images/guitar.jpg
     - assets/store_images/camera_store.jpg
     - assets/store_images/cloath_store.jpg
     - assets/store_images/musical_store.jpg
@@ -45,6 +43,10 @@ flutter:
     - assets/application_images/tools.jpg
     - assets/application_images/water_sports.jpg
     - assets/images/product_camera.jpg
+    - assets/images/man_surfing.jpg
+    - assets/images/party.jpg
+    - assets/images/audio_mixer.jpg
+    - assets/images/bike.png
 
 
 

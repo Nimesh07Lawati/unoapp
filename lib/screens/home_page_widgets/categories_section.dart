@@ -7,15 +7,15 @@ class CategoriesSection extends StatelessWidget {
   // Updated list to point to your asset images
   final List<Map<String, String>> categories = const [
     {'image': 'assets/application_images/car.jpg', 'name': 'Party+Events'},
-    {
-      'image': 'assets/application_images/date_table.jpg',
-      'name': 'WeddingWedding Wedding Wedding',
-    },
+    {'image': 'assets/application_images/date_table.jpg', 'name': 'Wedding'},
     {
       'image': 'assets/application_images/dining_hall.jpg',
       'name': 'Automotive',
     },
-    {'image': 'assets/application_images/tools.jpg', 'name': 'Watersports'},
+    {
+      'image': 'assets/application_images/tools.jpg',
+      'name': 'Watersports and this is the water ',
+    },
     {'image': 'assets/application_images/water_sports.jpg', 'name': 'Tools'},
   ];
 
@@ -42,8 +42,7 @@ class CategoriesSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height:
-              110, // Increased slightly to accommodate larger image containers
+          height: 130, // Increased height to accommodate 2 lines of text
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -77,7 +76,13 @@ class CategoriesSection extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(category['name']!, style: AppTextStyles.texts),
+                    Text(
+                      category['name']!,
+                      style: AppTextStyles.texts,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
               );

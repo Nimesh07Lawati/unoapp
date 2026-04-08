@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:unoapp/core/application_style/app_text_style.dart';
 
 class PopularSubcategoriesSection extends StatelessWidget {
   const PopularSubcategoriesSection({super.key});
 
   final List<Map<String, String>> subcategories = const [
-    {'title': 'Fairy Lights', 'image': 'assets/images/fairy_light.jpg'},
+    {'title': 'Fairy Lights', 'image': 'assets/images/party.jpg'},
     {'title': 'Skateboard', 'image': 'assets/images/skateboard.jpg'},
-    {'title': 'Sound Hair', 'image': 'assets/images/sound_card.jpg'},
+    {'title': 'Sound Hiring', 'image': 'assets/images/audio_mixer.jpg'},
   ];
 
   @override
@@ -18,16 +19,12 @@ class PopularSubcategoriesSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'Popular Subcategories',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1A1A1A),
-            ),
+            style: AppTextStyles.sectionLabelLeft,
           ),
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 130,
+          height: 160, // Increased height to fit the text below the image
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -36,57 +33,46 @@ class PopularSubcategoriesSection extends StatelessWidget {
               final item = subcategories[index];
               return Container(
                 width: 120,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
+                margin: const EdgeInsets.symmetric(horizontal: 6),
+                child: Column(
+                  children: [
+                    // Image part
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.asset(
+                            item['image']!,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // Label text below the image
+                    Text(
+                      item['title']!,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF1A1A1A),
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      // Full card image
-                      Image.asset(item['image']!, fit: BoxFit.cover),
-                      // Gradient overlay for better text visibility
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.6),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Label at the bottom
-                      Positioned(
-                        bottom: 8,
-                        left: 8,
-                        right: 8,
-                        child: Text(
-                          item['title']!,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               );
             },

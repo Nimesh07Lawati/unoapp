@@ -30,7 +30,7 @@ class HomeHeader extends StatelessWidget {
                   SvgPicture.asset(
                     'assets/icons/expand.svg',
                     width: 4,
-                    height: 8,
+                    height: 6,
                   ),
                 ],
               ),

@@ -13,20 +13,12 @@ class PartyHireSection extends StatelessWidget {
       'image': 'assets/images/yacht.jpg',
     },
     {
-      'title': 'Live Guitarist',
-      'discount': '20% OFF',
-      'price': '199',
-      'subcategory': 'Entertainment',
-      'location': 'Brisbane',
-      'image': 'assets/images/guitar.jpg',
-    },
-    {
       'title': 'Photo Booth',
       'discount': '15% OFF',
       'price': '79',
       'subcategory': 'Entertainment',
       'location': 'Robina',
-      'image': 'assets/images/camera.jpg',
+      'image': 'assets/images/product_camera.jpg',
     },
   ];
 
@@ -35,10 +27,10 @@ class PartyHireSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            'Party Hire',
+            'Party Hire Under \$99',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

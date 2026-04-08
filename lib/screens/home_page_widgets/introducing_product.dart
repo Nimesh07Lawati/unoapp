@@ -11,10 +11,12 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, String>> products = [
-    {'title': 'Xiaomi Mi 11 Ultra\n12GB+256GB', 'icon': 'phone_android'},
-    {'title': 'Apple iPhone 15 Pro\n8GB+512GB', 'icon': 'phone_iphone'},
-    {'title': 'Samsung Galaxy S24\n12GB+256GB', 'icon': 'tablet_android'},
+  // Added 4 items as requested
+  final List<String> titles = [
+    'Rent flexibly and affordably—instantly!',
+    'Get the latest tech gadgets today',
+    'Premium event gear for your party',
+    'Professional tools for every job',
   ];
 
   @override
@@ -23,30 +25,28 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
       height: 180,
       child: Stack(
         children: [
-          // The PageView
           PageView.builder(
             controller: _pageController,
             onPageChanged: (index) => setState(() => _currentPage = index),
-            itemCount: products.length,
+            itemCount: titles.length,
             itemBuilder: (context, index) {
-              return _buildCard(products[index]);
+              return _buildCard(titles[index]);
             },
           ),
-
-          // The Indicator positioned inside the Stack
           Positioned(
             bottom: 20,
             left: 0,
             right: 0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(products.length, (index) {
+              children: List.generate(titles.length, (index) {
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: _currentPage == index ? 20 : 8,
+                  width: 8, // Fixed width: indicator will NOT change shape
                   height: 8,
                   decoration: BoxDecoration(
+                    // Active color is orange, inactive is white with opacity
                     color: _currentPage == index
                         ? const Color(0xFFE67E22)
                         : Colors.white.withOpacity(0.4),
@@ -61,55 +61,83 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
     );
   }
 
-  Widget _buildCard(Map<String, String> product) {
+  Widget _buildCard(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF2C3E50), Color(0xFF1A1A2E)],
-          ),
           borderRadius: BorderRadius.circular(24),
+          image: const DecorationImage(
+            image: AssetImage('assets/images/man_surfing.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'INTRODUCING',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFFE67E22),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    product['title']!,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'HIRE NOW →',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFFE67E22),
-                    ),
-                  ),
-                ],
-              ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.black.withOpacity(0.6),
+                Colors.black.withOpacity(0.4),
+              ],
             ),
-            const Icon(Icons.phone_android, size: 60, color: Colors.white24),
-          ],
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Rently',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                        height: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      width: 92,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD42B65),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'HIRE NOW →',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.phone_android,
+                size: 60,
+                color: Colors.white.withOpacity(0.3),
+              ),
+            ],
+          ),
         ),
       ),
     );
