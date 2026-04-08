@@ -24,7 +24,7 @@ class PopularSubcategoriesSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 184 + 10 + 20, // ✅ image height + spacing + text height
+          height: 184 + 10 + 20, // Image height + gap + text height
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -37,20 +37,11 @@ class PopularSubcategoriesSection extends StatelessWidget {
                   children: [
                     // Image part
                     Container(
-                      width: 156, // ✅ Figma width
-                      height: 184, // ✅ Figma height
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 2.225, // ✅ half of gap: 4.45px
-                      ),
+                      width: 156, //  Figma width
+                      height: 156, //  Figma height
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
@@ -78,7 +69,7 @@ class PopularSubcategoriesSection extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF1A1A1A),
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

@@ -80,17 +80,10 @@ class FeaturedStoresSection extends StatelessWidget {
       height: 208,
       padding: const EdgeInsets.all(
         8,
-      ), // ✅ Reduced from 12 to 8 to prevent overflow
+      ), // Reduced from 12 to 8 to prevent overflow
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

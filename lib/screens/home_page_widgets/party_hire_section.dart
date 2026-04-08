@@ -48,20 +48,11 @@ class PartyHireSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = partyItems[index];
               return Container(
-                width: 216, // ✅ Figma card width
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 6,
-                ), // ✅ gap: 12px
+                width: 216, //  Figma card width
+                margin: const EdgeInsets.symmetric(horizontal: 8), //  gap: 12px
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
