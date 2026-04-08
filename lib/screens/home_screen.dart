@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
 
                     // Categories Section
                     const CategoriesSection(),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 24),
                     // Introducing Product Card
                     const IntroducingProductCard(),
                     const SizedBox(height: 32),

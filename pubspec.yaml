@@ -25,7 +25,6 @@ flutter:
     - assets/images/fairy_light.jpg
     - assets/images/skateboard.jpg
     - assets/images/sound_card.jpg
-    - assets/images/camera.jpg
     - assets/images/vintage_sound_system.jpg
     - assets/images/led_dance_floor.jpg
     - assets/images/yacht.jpg
@@ -45,6 +44,7 @@ flutter:
     - assets/application_images/dining_hall.jpg
     - assets/application_images/tools.jpg
     - assets/application_images/water_sports.jpg
+    - assets/images/product_camera.jpg
 
 
 

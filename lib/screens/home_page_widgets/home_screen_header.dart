@@ -50,10 +50,7 @@ class HomeHeader extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.noticeBackgroundColor,
-              border: Border.all(color: const Color(0xFFB8CEFF), width: 1),
-            ),
+            decoration: BoxDecoration(color: AppColors.noticeBackgroundColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

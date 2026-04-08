@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart'; // Ensure flutter_svg is imported
 
 class MostPopularSection extends StatelessWidget {
   const MostPopularSection({super.key});
@@ -10,7 +11,7 @@ class MostPopularSection extends StatelessWidget {
       'price': '99',
       'subcategory': 'Audio & Music',
       'location': 'Surfers Paradise',
-      'image': 'assets/images/vintage_sound_system.jpg',
+      'image': 'assets/images/product_camera.jpg', // Using your requested image
     },
     {
       'title': 'LED Dance Floor',
@@ -18,7 +19,8 @@ class MostPopularSection extends StatelessWidget {
       'price': '149',
       'subcategory': 'Lighting & Decor',
       'location': 'Broadbeach',
-      'image': 'assets/images/led_dance_floor.jpg',
+      'image':
+          'assets/application_images/dining_hall.jpg', // Using your requested image
     },
     {
       'title': 'Photo Booth',
@@ -26,7 +28,7 @@ class MostPopularSection extends StatelessWidget {
       'price': '79',
       'subcategory': 'Entertainment',
       'location': 'Robina',
-      'image': 'assets/images/camera.jpg',
+      'image': 'assets/images/product_camera.jpg', // Alternating images
     },
   ];
 
@@ -42,12 +44,12 @@ class MostPopularSection extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(
-                    Icons.trending_up,
-                    size: 22,
-                    color: Color(0xFFE67E22),
+                  SvgPicture.asset(
+                    'assets/icons/growth_arrow.svg',
+                    width: 22,
+                    height: 22,
                   ),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: 8),
                   const Text(
                     'Most Popular',
                     style: TextStyle(
@@ -62,10 +64,10 @@ class MostPopularSection extends StatelessWidget {
                 onTap: () {
                   // Handle see all
                 },
-                child: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Color(0xFFE67E22),
+                child: SvgPicture.asset(
+                  'assets/icons/arrow-right.svg',
+                  width: 16,
+                  height: 16,
                 ),
               ),
             ],
@@ -97,7 +99,6 @@ class MostPopularSection extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Image area
                     Stack(
                       children: [
                         ClipRRect(
@@ -110,29 +111,8 @@ class MostPopularSection extends StatelessWidget {
                             height: 110,
                             width: double.infinity,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              // Fallback if image not found
-                              return Container(
-                                height: 110,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF0F0F0),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16),
-                                    topRight: Radius.circular(16),
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.inventory_2,
-                                    size: 48,
-                                    color: Color(0xFFCCCCCC),
-                                  ),
-                                ),
-                              );
-                            },
                           ),
                         ),
-                        // Discount badge
                         Positioned(
                           top: 8,
                           left: 8,
@@ -157,14 +137,11 @@ class MostPopularSection extends StatelessWidget {
                         ),
                       ],
                     ),
-
-                    // Info area
                     Padding(
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Item title
                           Text(
                             item['title'] as String,
                             style: const TextStyle(
@@ -175,59 +152,25 @@ class MostPopularSection extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 3),
-
-                          // Subcategory label
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.label_outline,
-                                size: 11,
-                                color: Color(0xFF101B30),
-                              ),
-                              const SizedBox(width: 3),
-                              Expanded(
-                                child: Text(
-                                  item['subcategory'] as String,
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF101B30),
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
+                          const SizedBox(height: 4),
+                          Text(
+                            item['subcategory'] as String,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF101B30),
+                            ),
                           ),
-                          const SizedBox(height: 3),
-
-                          // Store location
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.location_on_outlined,
-                                size: 11,
-                                color: Color(0xFF9E9E9E),
-                              ),
-                              const SizedBox(width: 3),
-                              Expanded(
-                                child: Text(
-                                  item['location'] as String,
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xFF9E9E9E),
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
+                          const SizedBox(height: 4),
+                          Text(
+                            item['location'] as String,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF9E9E9E),
+                            ),
                           ),
-                          const SizedBox(height: 5),
-
-                          // Price
+                          const SizedBox(height: 6),
                           Text(
                             'From \$${item['price']}/day',
                             style: const TextStyle(

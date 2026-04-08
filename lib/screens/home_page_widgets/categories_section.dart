@@ -4,12 +4,19 @@ import 'package:unoapp/core/application_style/app_text_style.dart';
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
 
-  final List<Map<String, dynamic>> categories = const [
-    {'icon': Icons.celebration, 'name': 'Party+Events'},
-    {'icon': Icons.favorite, 'name': 'Wedding'},
-    {'icon': Icons.directions_car, 'name': 'Automotive'},
-    {'icon': Icons.water, 'name': 'Watersports'},
-    {'icon': Icons.build, 'name': 'Tools'},
+  // Updated list to point to your asset images
+  final List<Map<String, String>> categories = const [
+    {'image': 'assets/application_images/car.jpg', 'name': 'Party+Events'},
+    {
+      'image': 'assets/application_images/date_table.jpg',
+      'name': 'WeddingWedding Wedding Wedding',
+    },
+    {
+      'image': 'assets/application_images/dining_hall.jpg',
+      'name': 'Automotive',
+    },
+    {'image': 'assets/application_images/tools.jpg', 'name': 'Watersports'},
+    {'image': 'assets/application_images/water_sports.jpg', 'name': 'Tools'},
   ];
 
   @override
@@ -17,7 +24,6 @@ class CategoriesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Top section with "Categories" and "See All"
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
@@ -25,23 +31,19 @@ class CategoriesSection extends StatelessWidget {
             children: [
               const Text('Categories', style: AppTextStyles.sectionLabelLeft),
               GestureDetector(
-                onTap: () {
-                  // Handle See All tap
-                },
+                onTap: () {},
                 child: const Text(
                   'See All',
-                  style: AppTextStyles
-                      .sectionLabelRight, // Assuming this style exists for 'See All'
+                  style: AppTextStyles.sectionLabelRight,
                 ),
               ),
             ],
           ),
         ),
         const SizedBox(height: 16),
-
-        // Horizontal list of categories
         SizedBox(
-          height: 100, // Increased height slightly to accommodate 2-line labels
+          height:
+              110, // Increased slightly to accommodate larger image containers
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -53,37 +55,29 @@ class CategoriesSection extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 child: Column(
                   children: [
+                    // Image container
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      width: 56, // Set specific size
+                      height: 56,
                       decoration: BoxDecoration(
-                        color: Colors.white,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.03),
-                            blurRadius: 8,
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 6,
                             offset: const Offset(0, 2),
                           ),
                         ],
                       ),
-                      child: Icon(
-                        category['icon'] as IconData,
-                        size: 28,
-                        color: const Color(0xFFE67E22),
+                      child: ClipOval(
+                        child: Image.asset(
+                          category['image']!,
+                          fit: BoxFit.cover, // Ensures image fills the circle
+                        ),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      category['name'] as String,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF4A4A4A),
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    Text(category['name']!, style: AppTextStyles.texts),
                   ],
                 ),
               );
