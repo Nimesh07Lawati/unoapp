@@ -27,7 +27,7 @@ class PartyHireSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'Party Hire Under \$99',
@@ -40,7 +40,7 @@ class PartyHireSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 220,
+          height: 344, // ✅ Figma card height
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -48,8 +48,10 @@ class PartyHireSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = partyItems[index];
               return Container(
-                width: 160,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: 216, // ✅ Figma card width
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 6,
+                ), // ✅ gap: 12px
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
@@ -68,16 +70,21 @@ class PartyHireSection extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+                            topLeft: Radius.circular(
+                              12,
+                            ), // ✅ Figma border-radius: 12
+                            topRight: Radius.circular(
+                              12,
+                            ), // ✅ Only top corners since image sits at top of card
                           ),
                           child: Image.asset(
                             item['image'] as String,
-                            height: 110,
-                            width: double.infinity,
+                            height: 216, // ✅ Figma image height
+                            width: 216, // ✅ Figma image width
                             fit: BoxFit.cover,
                             errorBuilder: (c, e, s) => Container(
-                              height: 110,
+                              height: 216,
+                              width: 216,
                               color: const Color(0xFFF0F0F0),
                               child: const Icon(
                                 Icons.celebration,
@@ -111,38 +118,45 @@ class PartyHireSection extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(12), // ✅ gap: 12px
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            item['title'],
+                            item['title'] as String,
                             style: const TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
+                              color: Color(0xFF1A1A1A),
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 3),
+                          const SizedBox(height: 4),
                           Text(
-                            item['subcategory'],
+                            item['subcategory'] as String,
                             style: const TextStyle(
-                              fontSize: 11,
+                              fontSize: 12,
                               color: Color(0xFF101B30),
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 3),
+                          const SizedBox(height: 4),
                           Text(
-                            item['location'],
+                            item['location'] as String,
                             style: const TextStyle(
-                              fontSize: 11,
+                              fontSize: 12,
                               color: Color(0xFF9E9E9E),
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 5),
+                          const SizedBox(height: 8),
                           Text(
                             'From \$${item['price']}/day',
                             style: const TextStyle(
-                              fontSize: 12,
+                              fontSize: 13,
                               fontWeight: FontWeight.w500,
                               color: Color(0xFFE67E22),
                             ),

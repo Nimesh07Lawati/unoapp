@@ -4,7 +4,6 @@ import 'package:unoapp/core/application_style/app_text_style.dart';
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
 
-  // Updated list to point to your asset images
   final List<Map<String, String>> categories = const [
     {'image': 'assets/application_images/car.jpg', 'name': 'Party+Events'},
     {'image': 'assets/application_images/date_table.jpg', 'name': 'Wedding'},
@@ -14,7 +13,7 @@ class CategoriesSection extends StatelessWidget {
     },
     {
       'image': 'assets/application_images/tools.jpg',
-      'name': 'Watersports and this is the water ',
+      'name': 'Watersports & Outdoors and and and and and',
     },
     {'image': 'assets/application_images/water_sports.jpg', 'name': 'Tools'},
   ];
@@ -42,7 +41,7 @@ class CategoriesSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 130, // Increased height to accommodate 2 lines of text
+          height: 100, // ✅ Reduced height since we only need 1 line of text now
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -54,9 +53,8 @@ class CategoriesSection extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 child: Column(
                   children: [
-                    // Image container
                     Container(
-                      width: 56, // Set specific size
+                      width: 56,
                       height: 56,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -71,7 +69,7 @@ class CategoriesSection extends StatelessWidget {
                       child: ClipOval(
                         child: Image.asset(
                           category['image']!,
-                          fit: BoxFit.cover, // Ensures image fills the circle
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -80,8 +78,8 @@ class CategoriesSection extends StatelessWidget {
                       category['name']!,
                       style: AppTextStyles.texts,
                       textAlign: TextAlign.center,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1, // ✅ Single line only
+                      overflow: TextOverflow.ellipsis, // ✅ Ellipsis on overflow
                     ),
                   ],
                 ),

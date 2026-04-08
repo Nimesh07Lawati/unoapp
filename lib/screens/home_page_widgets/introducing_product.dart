@@ -11,7 +11,6 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // Added 4 items as requested
   final List<String> titles = [
     'Rent flexibly and affordably—instantly!',
     'Get the latest tech gadgets today',
@@ -22,7 +21,7 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
+      height: 182, // ✅ Figma height
       child: Stack(
         children: [
           PageView.builder(
@@ -34,7 +33,7 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
             },
           ),
           Positioned(
-            bottom: 20,
+            bottom: 16,
             left: 0,
             right: 0,
             child: Row(
@@ -43,10 +42,9 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: 8, // Fixed width: indicator will NOT change shape
+                  width: 8,
                   height: 8,
                   decoration: BoxDecoration(
-                    // Active color is orange, inactive is white with opacity
                     color: _currentPage == index
                         ? const Color(0xFFE67E22)
                         : Colors.white.withOpacity(0.4),
@@ -63,10 +61,13 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
 
   Widget _buildCard(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 24), // ✅ Figma left: 24
       child: Container(
+        width: double
+            .infinity, // ✅ Figma width: 392 (fills available space with 24px padding on each side)
+        height: 182, // ✅ Figma height
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(8), // ✅ Figma radius: 8
           image: const DecorationImage(
             image: AssetImage('assets/images/man_surfing.jpg'),
             fit: BoxFit.cover,
@@ -74,7 +75,7 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
         ),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(8), // ✅ Figma radius: 8
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,

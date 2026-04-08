@@ -24,37 +24,47 @@ class PopularSubcategoriesSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 160, // Increased height to fit the text below the image
+          height: 184 + 10 + 20, // ✅ image height + spacing + text height
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             itemCount: subcategories.length,
             itemBuilder: (context, index) {
               final item = subcategories[index];
-              return Container(
-                width: 120,
-                margin: const EdgeInsets.symmetric(horizontal: 6),
+              return SizedBox(
+                width: 156, // ✅ Figma image width
                 child: Column(
                   children: [
                     // Image part
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 8,
-                              offset: const Offset(0, 4),
+                    Container(
+                      width: 156, // ✅ Figma width
+                      height: 184, // ✅ Figma height
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 2.225, // ✅ half of gap: 4.45px
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.asset(
+                          item['image']!,
+                          fit: BoxFit.cover,
+                          width: 156,
+                          height: 184,
+                          errorBuilder: (c, e, s) => Container(
+                            color: const Color(0xFFF0F0F0),
+                            child: const Icon(
+                              Icons.image,
+                              color: Color(0xFFCCCCCC),
                             ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.asset(
-                            item['image']!,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
                           ),
                         ),
                       ),

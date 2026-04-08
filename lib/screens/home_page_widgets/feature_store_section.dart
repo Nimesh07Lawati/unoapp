@@ -7,16 +7,16 @@ class FeaturedStoresSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final stores = [
       {
-        'name': 'Camera Pro',
-        'subcategory': 'Photography',
+        'name': 'Celebration Rentals',
+        'subcategory': 'hall',
         'location': 'Kathmandu, Nepal',
-        'image': 'assets/store_images/camera_store.jpg',
+        'image': 'assets/images/first_store.jpg',
       },
       {
         'name': 'Fashion Rent',
         'subcategory': 'Apparel',
         'location': 'Lalitpur, Nepal',
-        'image': 'assets/store_images/cloath_store.jpg',
+        'image': 'assets/images/yacht.jpg',
       },
       {
         'name': 'Sound Waves',
@@ -43,7 +43,7 @@ class FeaturedStoresSection extends StatelessWidget {
         const SizedBox(height: 12),
 
         SizedBox(
-          height: 190,
+          height: 208,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -51,7 +51,6 @@ class FeaturedStoresSection extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(width: 16),
             itemBuilder: (context, index) {
               final store = stores[index];
-
               return SizedBox(
                 width: 180,
                 child: _buildStoreCard(
@@ -77,7 +76,11 @@ class FeaturedStoresSection extends StatelessWidget {
     String imagePath,
   ) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      width: 180,
+      height: 208,
+      padding: const EdgeInsets.all(
+        8,
+      ), // ✅ Reduced from 12 to 8 to prevent overflow
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -93,14 +96,15 @@ class FeaturedStoresSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(6),
             child: Image.asset(
               imagePath,
-              height: 90,
-              width: double.infinity,
+              height: 120,
+              width: 180,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => Container(
-                height: 90,
+                height: 120,
+                width: 180,
                 color: const Color(0xFFF0F0F0),
                 child: const Center(
                   child: Icon(Icons.store, size: 32, color: Color(0xFFCCCCCC)),
@@ -108,7 +112,7 @@ class FeaturedStoresSection extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 6), // ✅ Reduced from 10 to 6
           Text(
             name,
             style: const TextStyle(
@@ -119,12 +123,12 @@ class FeaturedStoresSection extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 3), // ✅ Reduced from 4 to 3
           Text(
             subcategory,
             style: const TextStyle(fontSize: 11, color: Color(0xFF8A8A8A)),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4), // ✅ Reduced from 6 to 4
           Row(
             children: [
               const Icon(

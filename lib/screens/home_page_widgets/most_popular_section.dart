@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Ensure flutter_svg is imported
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MostPopularSection extends StatelessWidget {
   const MostPopularSection({super.key});
@@ -11,7 +11,7 @@ class MostPopularSection extends StatelessWidget {
       'price': '99',
       'subcategory': 'Audio & Music',
       'location': 'Surfers Paradise',
-      'image': 'assets/images/product_camera.jpg', // Using your requested image
+      'image': 'assets/images/product_camera.jpg',
     },
     {
       'title': 'LED Dance Floor',
@@ -19,8 +19,7 @@ class MostPopularSection extends StatelessWidget {
       'price': '149',
       'subcategory': 'Lighting & Decor',
       'location': 'Broadbeach',
-      'image':
-          'assets/application_images/dining_hall.jpg', // Using your requested image
+      'image': 'assets/application_images/dining_hall.jpg',
     },
     {
       'title': 'Photo Booth',
@@ -28,7 +27,7 @@ class MostPopularSection extends StatelessWidget {
       'price': '79',
       'subcategory': 'Entertainment',
       'location': 'Robina',
-      'image': 'assets/images/product_camera.jpg', // Alternating images
+      'image': 'assets/images/product_camera.jpg',
     },
   ];
 
@@ -61,9 +60,7 @@ class MostPopularSection extends StatelessWidget {
                 ],
               ),
               GestureDetector(
-                onTap: () {
-                  // Handle see all
-                },
+                onTap: () {},
                 child: SvgPicture.asset(
                   'assets/icons/arrow-right.svg',
                   width: 16,
@@ -75,7 +72,7 @@ class MostPopularSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 220,
+          height: 344, // ✅ Figma card height
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -83,8 +80,10 @@ class MostPopularSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = popularItems[index];
               return Container(
-                width: 160,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: 216, // ✅ Figma card width
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 6,
+                ), // ✅ gap: 12px
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
@@ -103,14 +102,25 @@ class MostPopularSection extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+                            topLeft: Radius.circular(
+                              12,
+                            ), // ✅ Figma image border-radius
+                            topRight: Radius.circular(12),
                           ),
                           child: Image.asset(
                             item['image'] as String,
-                            height: 110,
-                            width: double.infinity,
+                            height: 216, // ✅ Figma image height
+                            width: 216, // ✅ Figma image width
                             fit: BoxFit.cover,
+                            errorBuilder: (c, e, s) => Container(
+                              height: 216,
+                              width: 216,
+                              color: const Color(0xFFF0F0F0),
+                              child: const Icon(
+                                Icons.celebration,
+                                color: Color(0xFFCCCCCC),
+                              ),
+                            ),
                           ),
                         ),
                         Positioned(
@@ -138,14 +148,14 @@ class MostPopularSection extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(12), // ✅ gap: 12px
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             item['title'] as String,
                             style: const TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: Color(0xFF1A1A1A),
                             ),
@@ -156,7 +166,7 @@ class MostPopularSection extends StatelessWidget {
                           Text(
                             item['subcategory'] as String,
                             style: const TextStyle(
-                              fontSize: 11,
+                              fontSize: 12,
                               fontWeight: FontWeight.w500,
                               color: Color(0xFF101B30),
                             ),
@@ -165,16 +175,16 @@ class MostPopularSection extends StatelessWidget {
                           Text(
                             item['location'] as String,
                             style: const TextStyle(
-                              fontSize: 11,
+                              fontSize: 12,
                               fontWeight: FontWeight.w400,
                               color: Color(0xFF9E9E9E),
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: 8),
                           Text(
                             'From \$${item['price']}/day',
                             style: const TextStyle(
-                              fontSize: 12,
+                              fontSize: 13,
                               fontWeight: FontWeight.w500,
                               color: Color(0xFFE67E22),
                             ),
