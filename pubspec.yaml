@@ -40,4 +40,12 @@ flutter:
     - assets/icons/menu.svg
     - assets/fonts/PublicSans-Regular.ttf
     - assets/fonts/PublicSans-SemiBold.ttf
+    - assets/application_images/car.jpg
+    - assets/application_images/date_table.jpg
+    - assets/application_images/dining_hall.jpg
+    - assets/application_images/tools.jpg
+    - assets/application_images/water_sports.jpg
+
+
+
   

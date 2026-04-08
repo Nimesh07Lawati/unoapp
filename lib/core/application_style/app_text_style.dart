@@ -10,13 +10,30 @@ class AppTextStyles {
     color: Color(0xFF101B30),
   );
 
-  static const TextStyle buttonLabel = TextStyle(
+  static const TextStyle texts = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+    height: 20 / 12, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF404959),
+  );
+  static const TextStyle buttonLabelRight = TextStyle(
     fontFamily: 'PublicSans',
     fontWeight: FontWeight.w500,
     fontSize: 14,
     height: 22 / 14, // line-height ÷ font-size
     letterSpacing: 0,
     color: Color(0xFFFFFFFF),
+  );
+
+  static const TextStyle buttonLabelLeft = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w500,
+    fontSize: 14,
+    height: 22 / 14, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF101B30),
   );
 
   static const TextStyle sectionLabelLeft = TextStyle(

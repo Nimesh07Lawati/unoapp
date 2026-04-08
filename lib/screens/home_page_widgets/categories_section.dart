@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unoapp/core/application_style/app_text_style.dart';
 
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
@@ -16,20 +17,31 @@ class CategoriesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            'Categories',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1A1A1A),
-            ),
+        // Top section with "Categories" and "See All"
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Categories', style: AppTextStyles.sectionLabelLeft),
+              GestureDetector(
+                onTap: () {
+                  // Handle See All tap
+                },
+                child: const Text(
+                  'See All',
+                  style: AppTextStyles
+                      .sectionLabelRight, // Assuming this style exists for 'See All'
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 16),
+
+        // Horizontal list of categories
         SizedBox(
-          height: 80,
+          height: 100, // Increased height slightly to accommodate 2-line labels
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -45,7 +57,7 @@ class CategoriesSection extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        shape: BoxShape.circle, // This makes it fully round
+                        shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.03),
