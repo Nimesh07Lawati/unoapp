@@ -117,7 +117,7 @@ class GridViewScreencards extends StatelessWidget {
                     ),
                   ),
                   child: const Icon(
-                    Icons.arrow_back,
+                    Icons.chevron_left,
                     size: 20,
                     color: Color(0xFF1A1A1A),
                   ),

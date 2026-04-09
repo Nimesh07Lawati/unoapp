@@ -35,6 +35,7 @@ flutter:
     - assets/icons/growth_arrow.svg
     - assets/icons/location.svg
     - assets/icons/menu.svg
+    - assets/icons/chevronleft.svg
     - assets/icons/message.svg
     - assets/icons/calendar.svg
     - assets/fonts/PublicSans-Regular.ttf

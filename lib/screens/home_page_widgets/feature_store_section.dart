@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unoapp/core/application_style/app_text_style.dart';
 
 class FeaturedStoresSection extends StatelessWidget {
@@ -44,7 +45,9 @@ class FeaturedStoresSection extends StatelessWidget {
                   style: AppTextStyles.sectionLabelLeft,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.push('/gridcards');
+                  },
                   child: Container(
                     width: 32,
                     height: 32,
