@@ -113,13 +113,13 @@ class MainShell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     NavItem(
-                      icon: Icons.home,
+                      svgPath: 'assets/icons/nav_bar_icons/home.svg',
                       label: 'Home',
                       selected: index == 0,
                       onTap: () => context.go('/home'),
                     ),
                     NavItem(
-                      icon: Icons.category,
+                      svgPath: 'assets/icons/nav_bar_icons/note-text.svg',
                       label: 'Categories',
                       selected: index == 1,
                       onTap: () => context.go('/categories'),
@@ -158,13 +158,13 @@ class MainShell extends StatelessWidget {
                     ),
 
                     NavItem(
-                      icon: Icons.book_online,
+                      svgPath: 'assets/icons/nav_bar_icons/calendar.svg',
                       label: 'Booking',
                       selected: index == 3,
                       onTap: () => context.go('/booking'),
                     ),
                     NavItem(
-                      icon: Icons.chat,
+                      svgPath: 'assets/icons/nav_bar_icons/chat.svg',
                       label: 'Chat',
                       selected: index == 4,
                       onTap: () => context.go('/chat'),
