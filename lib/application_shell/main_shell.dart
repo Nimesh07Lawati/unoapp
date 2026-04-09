@@ -30,7 +30,7 @@ class MainShell extends StatelessWidget {
     final index = _selectedIndex(location);
 
     return Scaffold(
-      body: child,
+      body: SafeArea(top: true, bottom: false, child: child),
       extendBody: true,
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
@@ -69,7 +69,7 @@ class MainShell extends StatelessWidget {
                   height: 32,
                   child: OutlinedButton(
                     onPressed: () {
-                      // TODO: navigate to sign in
+                      debugPrint("Sign In button pressed");
                     },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white,

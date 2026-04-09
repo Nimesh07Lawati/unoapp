@@ -18,6 +18,15 @@ class AppTextStyles {
     letterSpacing: 0,
     color: Color(0xFF404959),
   );
+
+  static const TextStyle bannerLabel = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    height: 24 / 16, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF101B30),
+  );
   static const TextStyle buttonLabelRight = TextStyle(
     fontFamily: 'PublicSans',
     fontWeight: FontWeight.w500,
@@ -57,6 +66,48 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 12,
     height: 20 / 12, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF101B30),
+  );
+  static const TextStyle cardTitle = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    height: 24 / 16, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF101B30),
+  );
+
+  static const TextStyle cardSubtitle = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    height: 22 / 14, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF404959),
+  );
+  static const TextStyle cardLocation = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    height: 20 / 12, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF9E9E9E),
+  );
+  static const TextStyle priceLabel = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    height: 22 / 18, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFFD42B65),
+  );
+
+  static const TextStyle childPageHeader = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w600,
+    fontSize: 30,
+    height: 38 / 30, // line-height ÷ font-size
     letterSpacing: 0,
     color: Color(0xFF101B30),
   );

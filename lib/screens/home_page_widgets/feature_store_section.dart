@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unoapp/core/application_style/app_text_style.dart';
 
 class FeaturedStoresSection extends StatelessWidget {
@@ -44,7 +45,9 @@ class FeaturedStoresSection extends StatelessWidget {
                   style: AppTextStyles.sectionLabelLeft,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.push('/gridcards');
+                  },
                   child: Container(
                     width: 32,
                     height: 32,
@@ -138,19 +141,12 @@ class FeaturedStoresSection extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             name,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1A1A1A),
-            ),
+            style: AppTextStyles.cardTitle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 3),
-          Text(
-            subcategory,
-            style: const TextStyle(fontSize: 11, color: Color(0xFF8A8A8A)),
-          ),
+          Text(subcategory, style: AppTextStyles.cardSubtitle),
           const SizedBox(height: 4),
           Row(
             children: [
@@ -163,10 +159,7 @@ class FeaturedStoresSection extends StatelessWidget {
               Expanded(
                 child: Text(
                   location,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF8A8A8A),
-                  ),
+                  style: AppTextStyles.cardLocation,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

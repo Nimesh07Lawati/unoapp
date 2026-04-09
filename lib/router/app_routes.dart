@@ -5,6 +5,7 @@ import 'package:unoapp/screens/Home_screen.dart';
 import 'package:unoapp/screens/booking_screen.dart';
 import 'package:unoapp/screens/categories_screen.dart';
 import 'package:unoapp/screens/chat_screen.dart';
+import 'package:unoapp/screens/child_screens/grid_view_screen_cards.dart';
 import 'package:unoapp/screens/search_screen.dart';
 
 class AppRouter {
@@ -45,6 +46,13 @@ class AppRouter {
                 const NoTransitionPage(child: ChatScreen()),
           ),
         ],
+      ),
+
+      // other routes that are outside the shell
+      GoRoute(
+        path: '/gridcards',
+        pageBuilder: (context, state) =>
+            NoTransitionPage(child: GridViewScreencards()),
       ),
     ],
   );

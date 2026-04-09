@@ -35,6 +35,7 @@ flutter:
     - assets/icons/growth_arrow.svg
     - assets/icons/location.svg
     - assets/icons/menu.svg
+    - assets/icons/chevronleft.svg
     - assets/icons/message.svg
     - assets/icons/calendar.svg
     - assets/fonts/PublicSans-Regular.ttf
@@ -44,6 +45,9 @@ flutter:
     - assets/application_images/dining_hall.jpg
     - assets/application_images/tools.jpg
     - assets/application_images/water_sports.jpg
+    - assets/application_images/wedding.jpg
+    - assets/application_images/girl_in_car.jpg
+    - assets/application_images/girl_in_car_two.jpg
     - assets/application_images/rentsy_logo.png
     - assets/images/product_camera.jpg
     - assets/images/man_surfing.jpg
@@ -51,6 +55,7 @@ flutter:
     - assets/images/audio_mixer.jpg
     - assets/images/bike.png
     - assets/images/first_store.jpg
+    - assets/icons/hire_now_arrow_icon.svg
 
 
 

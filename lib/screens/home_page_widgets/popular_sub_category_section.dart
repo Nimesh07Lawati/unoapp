@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unoapp/core/application_style/app_text_style.dart';
 
 class PopularSubcategoriesSection extends StatelessWidget {
@@ -29,7 +30,11 @@ class PopularSubcategoriesSection extends StatelessWidget {
                   style: AppTextStyles.sectionLabelLeft,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.push(
+                      '/gridcards',
+                    ); // Navigate to the child category page
+                  },
                   child: Container(
                     width: 32,
                     height: 32,
@@ -99,11 +104,7 @@ class PopularSubcategoriesSection extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           item['title']!,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF1A1A1A),
-                          ),
+                          style: AppTextStyles.cardTitle,
                           textAlign: TextAlign.left,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

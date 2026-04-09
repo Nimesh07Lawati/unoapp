@@ -105,7 +105,7 @@ class SingleBannerCard extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE91E8C),
+                    color: const Color(0xFFD42B65),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text(
