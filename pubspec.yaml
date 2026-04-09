@@ -44,6 +44,9 @@ flutter:
     - assets/application_images/dining_hall.jpg
     - assets/application_images/tools.jpg
     - assets/application_images/water_sports.jpg
+    - assets/application_images/wedding.jpg
+    - assets/application_images/girl_in_car.jpg
+    - assets/application_images/girl_in_car_two.jpg
     - assets/application_images/rentsy_logo.png
     - assets/images/product_camera.jpg
     - assets/images/man_surfing.jpg

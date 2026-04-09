@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:unoapp/core/application_style/app_text_style.dart';
+import 'package:go_router/go_router.dart'; // Add this import for navigation
 
 class MostPopularSection extends StatelessWidget {
   const MostPopularSection({super.key});
@@ -64,7 +65,9 @@ class MostPopularSection extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.push('/gridcards');
+                  },
                   child: Container(
                     width: 32,
                     height: 32,
@@ -136,24 +139,24 @@ class MostPopularSection extends StatelessWidget {
                             ),
                           ),
 
-                          // ✅ Discount badge — flat left, rounded right, anchored to left edge
+                          // Discount badge — flat left, rounded right, anchored to left edge
                           Positioned(
                             top: 12,
-                            left: 0, // ✅ Flush to left edge of image
+                            left: 0,
                             child: Container(
-                              width: 73, // ✅ Figma width
-                              height: 29, // ✅ Figma height
+                              width: 73,
+                              height: 29,
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 10, // ✅ Figma padding-right/left
-                                vertical: 5, // ✅ Figma padding-top/bottom
+                                horizontal: 10,
+                                vertical: 5,
                               ),
                               decoration: const BoxDecoration(
-                                color: Color(0xFFD42B65), // ✅ Figma color
+                                color: Color(0xFFD42B65),
                                 borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(47.4), //
+                                  topRight: Radius.circular(47.4),
                                   bottomRight: Radius.circular(47.4),
                                   topLeft: Radius.zero,
-                                  bottomLeft: Radius.zero, // ✅ Flat left edge
+                                  bottomLeft: Radius.zero,
                                 ),
                               ),
                               child: Text(
@@ -185,9 +188,24 @@ class MostPopularSection extends StatelessWidget {
                               style: AppTextStyles.cardSubtitle,
                             ),
                             const SizedBox(height: 4),
-                            Text(
-                              item['location'] as String,
-                              style: AppTextStyles.cardLocation,
+                            // Location row with icon
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on_outlined,
+                                  size: 14,
+                                  color: Color(0xFF8A8A8A),
+                                ),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                  child: Text(
+                                    item['location'] as String,
+                                    style: AppTextStyles.cardLocation,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 8),
                             Text(
