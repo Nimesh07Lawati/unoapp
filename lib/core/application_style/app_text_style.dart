@@ -102,4 +102,13 @@ class AppTextStyles {
     letterSpacing: 0,
     color: Color(0xFFD42B65),
   );
+
+  static const TextStyle childPageHeader = TextStyle(
+    fontFamily: 'PublicSans',
+    fontWeight: FontWeight.w600,
+    fontSize: 30,
+    height: 38 / 30, // line-height ÷ font-size
+    letterSpacing: 0,
+    color: Color(0xFF101B30),
+  );
 }

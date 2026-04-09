@@ -52,7 +52,7 @@ class AppRouter {
       GoRoute(
         path: '/gridcards',
         pageBuilder: (context, state) =>
-            const NoTransitionPage(child: GridViewScreencards()),
+            NoTransitionPage(child: GridViewScreencards()),
       ),
     ],
   );

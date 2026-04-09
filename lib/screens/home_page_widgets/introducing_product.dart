@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:unoapp/core/application_style/app_text_style.dart';
 
 class IntroducingProductCard extends StatefulWidget {
   const IntroducingProductCard({super.key});
@@ -13,10 +14,10 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
   int _currentPage = 0;
 
   final List<String> titles = [
-    'Rent flexibly and \n affordably—instantly!',
-    'Get the latest tech gadgets today',
-    'Premium event gear for your party',
-    'Professional tools for every job',
+    'Rent flexibly and\naffordably—instantly!',
+    'Rent flexibly and\naffordably—instantly!',
+    'Rent flexibly and\naffordably—instantly!',
+    'Rent flexibly and\naffordably—instantly!',
   ];
 
   @override
@@ -69,7 +70,7 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
-        width: 392,
+        width: double.infinity, // Changed from fixed width to flexible
         height: 182,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -79,11 +80,11 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
           ),
         ),
         child: Container(
-          width: 392,
+          width: double.infinity, // Changed from fixed width to flexible
           height: 182,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Colors.black.withOpacity(0.16),
+            color: Color(0xFFF9F9F9).withValues(alpha: 0.16),
           ),
           padding: const EdgeInsets.only(
             left: 23.42,
@@ -113,13 +114,12 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                  height: 1.2,
+              Flexible(
+                child: Text(
+                  title,
+                  style: AppTextStyles.bannerLabel,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
               ),
               const SizedBox(height: 12),
@@ -145,8 +145,8 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
                     const SizedBox(width: 4),
                     SvgPicture.asset(
                       'assets/icons/hire_now_arrow_icon.svg',
-                      width: 12,
-                      height: 12,
+                      width: 8,
+                      height: 8,
                       colorFilter: const ColorFilter.mode(
                         Colors.white,
                         BlendMode.srcIn,
