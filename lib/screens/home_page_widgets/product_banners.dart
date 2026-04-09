@@ -18,6 +18,16 @@ class ProductBannersSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // To show 40% of the second banner, we need:
+    // First banner FULL width + 40% of second banner = screen width
+    // So: bannerWidth + (bannerWidth * 0.4) = screenWidth - horizontalPadding
+    // 1.4 * bannerWidth = screenWidth - horizontalPadding
+    // bannerWidth = (screenWidth - horizontalPadding) / 1.4
+
+    const horizontalPadding = 32.0; // 16 on left + 16 on right
+    final bannerWidth = (screenWidth - horizontalPadding) / 1.4;
+
     return Container(
       color: Colors.white, // ✅ White background
       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -28,9 +38,15 @@ class ProductBannersSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           itemCount: banners.length,
           itemBuilder: (context, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4),
-              child: SingleBannerCard(),
+            final item = banners[index];
+            return Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: SingleBannerCard(
+                title: item['title']!,
+                subtitle: item['subtitle']!,
+                imagePath: item['image']!,
+                bannerWidth: bannerWidth,
+              ),
             );
           },
         ),
@@ -40,14 +56,23 @@ class ProductBannersSection extends StatelessWidget {
 }
 
 class SingleBannerCard extends StatelessWidget {
-  const SingleBannerCard({super.key});
+  const SingleBannerCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.imagePath,
+    required this.bannerWidth,
+  });
+
+  final String title;
+  final String subtitle;
+  final String imagePath;
+  final double bannerWidth;
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width - 40;
-
     return Container(
-      width: width,
+      width: bannerWidth,
       height: 200,
       decoration: BoxDecoration(
         color: const Color(0xFF1A2340),
@@ -59,11 +84,7 @@ class SingleBannerCard extends StatelessWidget {
           Positioned(
             right: -20,
             bottom: -10,
-            child: Image.asset(
-              'assets/images/bike.png',
-              height: 160,
-              fit: BoxFit.contain,
-            ),
+            child: Image.asset(imagePath, height: 160, fit: BoxFit.contain),
           ),
           Padding(
             padding: const EdgeInsets.all(20),
@@ -90,9 +111,9 @@ class SingleBannerCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Xiaomi Mi 11 Ultra\n12GB+256GB',
-                  style: TextStyle(
+                Text(
+                  '$title\n$subtitle',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,

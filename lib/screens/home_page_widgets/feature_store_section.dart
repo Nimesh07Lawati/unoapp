@@ -8,6 +8,16 @@ class FeaturedStoresSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // To show 20% of the third card, we need:
+    // First card FULL width + Second card FULL width + 20% of third card = screen width
+    // So: cardWidth + cardWidth + (cardWidth * 0.2) = screenWidth - horizontalPadding
+    // 2.2 * cardWidth = screenWidth - horizontalPadding
+    // cardWidth = (screenWidth - horizontalPadding) / 2.2
+
+    const horizontalPadding = 40.0; // 20 on left + 20 on right (from padding)
+    final cardWidth = (screenWidth - horizontalPadding) / 2.2;
+
     final stores = [
       {
         'name': 'Celebration Rentals',
@@ -83,12 +93,13 @@ class FeaturedStoresSection extends StatelessWidget {
                 final store = stores[index];
 
                 return SizedBox(
-                  width: 180,
+                  width: cardWidth,
                   child: _buildStoreCard(
                     store['name']!,
                     store['subcategory']!,
                     store['location']!,
                     store['image']!,
+                    cardWidth,
                   ),
                 );
               },
@@ -104,9 +115,10 @@ class FeaturedStoresSection extends StatelessWidget {
     String subcategory,
     String location,
     String imagePath,
+    double cardWidth,
   ) {
     return Container(
-      width: 180,
+      width: cardWidth,
       height: 208,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -120,12 +132,12 @@ class FeaturedStoresSection extends StatelessWidget {
             child: Image.asset(
               imagePath,
               height: 120,
-              width: 180,
+              width: cardWidth,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
                   height: 120,
-                  width: 180,
+                  width: cardWidth,
                   color: const Color(0xFFF0F0F0),
                   child: const Center(
                     child: Icon(
