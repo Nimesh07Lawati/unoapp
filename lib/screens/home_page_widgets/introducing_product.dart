@@ -94,21 +94,15 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Rentsy Logo instead of text
               SizedBox(
                 width: 80.58,
                 height: 37.92,
-                child: const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Rentsy',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                      height: 1.2,
-                    ),
-                  ),
+                child: Image.asset(
+                  'assets/application_images/rentsy_logo.png',
+                  width: 80.58,
+                  height: 37.92,
+                  fit: BoxFit.contain,
                 ),
               ),
               const SizedBox(height: 8),

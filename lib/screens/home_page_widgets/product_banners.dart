@@ -78,7 +78,7 @@ class SingleBannerCard extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF5B8DEF),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text(
                     'INTRODUCING',
@@ -106,7 +106,7 @@ class SingleBannerCard extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE91E8C),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text(
                     'HIRE NOW →',
