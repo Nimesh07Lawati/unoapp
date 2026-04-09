@@ -83,7 +83,7 @@ class MostPopularSection extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF292D32).withOpacity(0.12),
+                      color: const Color(0xFF292D32).withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Center(

@@ -9,12 +9,6 @@ class FeaturedStoresSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    // To show 20% of the third card, we need:
-    // First card FULL width + Second card FULL width + 20% of third card = screen width
-    // So: cardWidth + cardWidth + (cardWidth * 0.2) = screenWidth - horizontalPadding
-    // 2.2 * cardWidth = screenWidth - horizontalPadding
-    // cardWidth = (screenWidth - horizontalPadding) / 2.2
-
     const horizontalPadding = 40.0; // 20 on left + 20 on right (from padding)
     final cardWidth = (screenWidth - horizontalPadding) / 2.2;
 
@@ -62,7 +56,7 @@ class FeaturedStoresSection extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF292D32).withOpacity(0.12),
+                      color: const Color(0xFF292D32).withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Center(

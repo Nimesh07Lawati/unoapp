@@ -39,7 +39,7 @@ class MainShell extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 64,
-            color: const Color(0xFF101B30).withOpacity(0.7),
+            color: const Color(0xFF101B30).withValues(alpha: 0.7),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +141,9 @@ class MainShell extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF4A90E2).withOpacity(0.3),
+                              color: const Color(
+                                0xFF4A90E2,
+                              ).withValues(alpha: 0.3),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),
