@@ -69,7 +69,7 @@ class MainShell extends StatelessWidget {
                   height: 32,
                   child: OutlinedButton(
                     onPressed: () {
-                      // TODO: navigate to sign in
+                      debugPrint("Sign In button pressed");
                     },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white,

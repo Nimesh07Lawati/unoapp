@@ -8,6 +8,7 @@ class GridViewScreencards extends StatelessWidget {
 
   final int resultsCount = 86;
   final String searchQuery = 'Wedding';
+
   final List<Map<String, dynamic>> rentalItems = [
     {
       'title': 'Luxury Wedding Venue',
@@ -39,84 +40,92 @@ class GridViewScreencards extends StatelessWidget {
     },
   ];
 
+  void _handleBack(BuildContext context) {
+    debugPrint('back button pressed');
+    context.pop();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.appBackgroundColor,
-      body: Stack(
-        children: [
-          // Content wrapped in SafeArea for bottom gesture protection
-          SafeArea(
-            bottom: true,
-            child: Column(
-              children: [
-                // Header Section
-                Container(
-                  color: AppColors.appBackgroundColor,
-                  // Top padding 105 ensures header text is below the back button (56+39+10)
-                  padding: const EdgeInsets.only(
-                    top: 105,
-                    left: 24,
-                    right: 24,
-                    bottom: 20,
-                  ),
-                  width: double.infinity,
-                  child: Text(
-                    '$resultsCount Results For “$searchQuery”',
-                    style: AppTextStyles.childPageHeader,
-                  ),
-                ),
-
-                // Grid List
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: GridView.builder(
-                      // Adding bottom padding inside GridView to clear system bar
-                      padding: const EdgeInsets.only(top: 0, bottom: 20),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
-                            childAspectRatio: 0.60,
-                          ),
-                      itemCount: rentalItems.length,
-                      itemBuilder: (context, index) =>
-                          _buildRentalCard(rentalItems[index]),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          _handleBack(context);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.appBackgroundColor,
+        body: Stack(
+          children: [
+            SafeArea(
+              bottom: true,
+              child: Column(
+                children: [
+                  Container(
+                    color: AppColors.appBackgroundColor,
+                    padding: const EdgeInsets.only(
+                      top: 105,
+                      left: 24,
+                      right: 24,
+                      bottom: 20,
+                    ),
+                    width: double.infinity,
+                    child: Text(
+                      '$resultsCount Results For “$searchQuery”',
+                      style: AppTextStyles.childPageHeader,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
 
-          // Exact Figma Back Button Position
-          Positioned(
-            top: 56,
-            left: 24,
-            child: GestureDetector(
-              onTap: () {
-                debugPrint("back button presseed");
-                context.pop();
-              },
-              child: Container(
-                width: 39,
-                height: 39,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: const Color(0xFFE5E5E5), width: 1),
-                ),
-                child: const Icon(
-                  Icons.arrow_back,
-                  size: 20,
-                  color: Color(0xFF1A1A1A),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: GridView.builder(
+                        padding: const EdgeInsets.only(top: 0, bottom: 20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                              childAspectRatio: 0.60,
+                            ),
+                        itemCount: rentalItems.length,
+                        itemBuilder: (context, index) {
+                          return _buildRentalCard(rentalItems[index]);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Positioned(
+              top: 56,
+              left: 24,
+              child: GestureDetector(
+                onTap: () => _handleBack(context),
+                child: Container(
+                  width: 39,
+                  height: 39,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: const Color(0xFFE5E5E5),
+                      width: 1,
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    size: 20,
+                    color: Color(0xFF1A1A1A),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -131,7 +140,6 @@ class GridViewScreencards extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image
           Expanded(
             flex: 5,
             child: ClipRRect(
@@ -145,7 +153,7 @@ class GridViewScreencards extends StatelessWidget {
               ),
             ),
           ),
-          // Content
+
           Expanded(
             flex: 4,
             child: Padding(
@@ -159,9 +167,13 @@ class GridViewScreencards extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
+
                   const SizedBox(height: 4),
+
                   Text(item['subcategory'], style: AppTextStyles.cardSubtitle),
+
                   const SizedBox(height: 4),
+
                   Row(
                     children: [
                       const Icon(
@@ -175,11 +187,14 @@ class GridViewScreencards extends StatelessWidget {
                           item['location'],
                           style: AppTextStyles.cardLocation,
                           maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
+
                   const Spacer(),
+
                   Text(item['price'], style: AppTextStyles.priceLabel),
                 ],
               ),
