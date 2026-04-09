@@ -18,18 +18,22 @@ class ProductBannersSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: banners.length,
-        itemBuilder: (context, index) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4),
-            child: SingleBannerCard(),
-          );
-        },
+    return Container(
+      color: Colors.white, // ✅ White background
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: SizedBox(
+        height: 200,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: banners.length,
+          itemBuilder: (context, index) {
+            return const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: SingleBannerCard(),
+            );
+          },
+        ),
       ),
     );
   }
@@ -40,7 +44,6 @@ class SingleBannerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Width set to MediaQuery to ensure it doesn't overflow or look too small
     double width = MediaQuery.of(context).size.width - 40;
 
     return Container(
