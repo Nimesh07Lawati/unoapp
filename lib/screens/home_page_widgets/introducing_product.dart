@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class IntroducingProductCard extends StatefulWidget {
   const IntroducingProductCard({super.key});
@@ -51,8 +52,8 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
                   height: 8,
                   decoration: BoxDecoration(
                     color: _currentPage == index
-                        ? const Color(0xFFD42B65)
-                        : Colors.white.withOpacity(0.4),
+                        ? const Color(0xFF101B30)
+                        : const Color(0xFFE7E8EA),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -130,13 +131,28 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
                   borderRadius: BorderRadius.circular(24),
                 ),
                 alignment: Alignment.center,
-                child: const Text(
-                  'HIRE NOW →',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'HIRE NOW',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    SvgPicture.asset(
+                      'assets/icons/hire_now_arrow_icon.svg',
+                      width: 12,
+                      height: 12,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

@@ -138,19 +138,12 @@ class FeaturedStoresSection extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             name,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1A1A1A),
-            ),
+            style: AppTextStyles.cardTitle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 3),
-          Text(
-            subcategory,
-            style: const TextStyle(fontSize: 11, color: Color(0xFF8A8A8A)),
-          ),
+          Text(subcategory, style: AppTextStyles.cardSubtitle),
           const SizedBox(height: 4),
           Row(
             children: [
@@ -163,10 +156,7 @@ class FeaturedStoresSection extends StatelessWidget {
               Expanded(
                 child: Text(
                   location,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF8A8A8A),
-                  ),
+                  style: AppTextStyles.cardLocation,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

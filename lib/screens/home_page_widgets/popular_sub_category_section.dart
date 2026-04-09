@@ -99,11 +99,7 @@ class PopularSubcategoriesSection extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           item['title']!,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF1A1A1A),
-                          ),
+                          style: AppTextStyles.cardTitle,
                           textAlign: TextAlign.left,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

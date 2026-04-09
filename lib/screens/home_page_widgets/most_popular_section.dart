@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:unoapp/core/application_style/app_text_style.dart';
 
 class MostPopularSection extends StatelessWidget {
   const MostPopularSection({super.key});
@@ -174,40 +175,24 @@ class MostPopularSection extends StatelessWidget {
                           children: [
                             Text(
                               item['title'] as String,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF1A1A1A),
-                              ),
+                              style: AppTextStyles.cardTitle,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 4),
                             Text(
                               item['subcategory'] as String,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF101B30),
-                              ),
+                              style: AppTextStyles.cardSubtitle,
                             ),
                             const SizedBox(height: 4),
                             Text(
                               item['location'] as String,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF9E9E9E),
-                              ),
+                              style: AppTextStyles.cardLocation,
                             ),
                             const SizedBox(height: 8),
                             Text(
                               'From \$${item['price']}/day',
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFFD42B65),
-                              ),
+                              style: AppTextStyles.priceLabel,
                             ),
                           ],
                         ),
