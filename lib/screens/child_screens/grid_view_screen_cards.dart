@@ -65,7 +65,7 @@ class GridViewScreencards extends StatelessWidget {
                   Container(
                     color: AppColors.appBackgroundColor,
                     padding: const EdgeInsets.only(
-                      top: 105,
+                      top: 80,
                       left: 24,
                       right: 24,
                       bottom: 20,

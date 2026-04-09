@@ -39,7 +39,7 @@ class MainShell extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 64,
-            color: const Color(0xFF101B30).withOpacity(0.7),
+            color: const Color(0xFF101B30).withValues(alpha: 0.7),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,13 +113,13 @@ class MainShell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     NavItem(
-                      icon: Icons.home,
+                      svgPath: 'assets/icons/nav_bar_icons/home.svg',
                       label: 'Home',
                       selected: index == 0,
                       onTap: () => context.go('/home'),
                     ),
                     NavItem(
-                      icon: Icons.category,
+                      svgPath: 'assets/icons/nav_bar_icons/note-text.svg',
                       label: 'Categories',
                       selected: index == 1,
                       onTap: () => context.go('/categories'),
@@ -141,7 +141,9 @@ class MainShell extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF4A90E2).withOpacity(0.3),
+                              color: const Color(
+                                0xFF4A90E2,
+                              ).withValues(alpha: 0.3),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),
@@ -156,13 +158,13 @@ class MainShell extends StatelessWidget {
                     ),
 
                     NavItem(
-                      icon: Icons.book_online,
+                      svgPath: 'assets/icons/nav_bar_icons/calendar.svg',
                       label: 'Booking',
                       selected: index == 3,
                       onTap: () => context.go('/booking'),
                     ),
                     NavItem(
-                      icon: Icons.chat,
+                      svgPath: 'assets/icons/nav_bar_icons/chat.svg',
                       label: 'Chat',
                       selected: index == 4,
                       onTap: () => context.go('/chat'),

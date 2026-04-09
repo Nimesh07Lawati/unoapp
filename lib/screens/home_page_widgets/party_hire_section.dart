@@ -27,6 +27,16 @@ class PartyHireSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // To show 90% of the second card, we need:
+    // First card FULL width + 90% of second card = screen width
+    // So: cardWidth + (cardWidth * 0.9) = screenWidth - horizontalPadding
+    // 1.9 * cardWidth = screenWidth - horizontalPadding
+    // cardWidth = (screenWidth - horizontalPadding) / 1.9
+
+    const horizontalPadding = 32.0; // 16 on left + 16 on right
+    final cardWidth = (screenWidth - horizontalPadding) / 1.9;
+
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -50,7 +60,7 @@ class PartyHireSection extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF292D32).withOpacity(0.12),
+                      color: const Color(0xFF292D32).withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
@@ -80,8 +90,8 @@ class PartyHireSection extends StatelessWidget {
                 final item = partyItems[index];
 
                 return Container(
-                  width: 216,
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  width: cardWidth,
+                  margin: const EdgeInsets.only(right: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
@@ -101,12 +111,12 @@ class PartyHireSection extends StatelessWidget {
                             child: Image.asset(
                               item['image'] as String,
                               height: 216,
-                              width: 216,
+                              width: cardWidth,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
                                   height: 216,
-                                  width: 216,
+                                  width: cardWidth,
                                   color: const Color(0xFFF0F0F0),
                                   child: const Icon(
                                     Icons.celebration,
@@ -116,7 +126,6 @@ class PartyHireSection extends StatelessWidget {
                               },
                             ),
                           ),
-
                           // Discount badge — flat left, rounded right, flush to left edge
                           Positioned(
                             top: 12,

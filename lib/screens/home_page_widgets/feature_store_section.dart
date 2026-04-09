@@ -8,6 +8,10 @@ class FeaturedStoresSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    const horizontalPadding = 40.0; // 20 on left + 20 on right (from padding)
+    final cardWidth = (screenWidth - horizontalPadding) / 2.2;
+
     final stores = [
       {
         'name': 'Celebration Rentals',
@@ -52,7 +56,7 @@ class FeaturedStoresSection extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF292D32).withOpacity(0.12),
+                      color: const Color(0xFF292D32).withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
@@ -83,12 +87,13 @@ class FeaturedStoresSection extends StatelessWidget {
                 final store = stores[index];
 
                 return SizedBox(
-                  width: 180,
+                  width: cardWidth,
                   child: _buildStoreCard(
                     store['name']!,
                     store['subcategory']!,
                     store['location']!,
                     store['image']!,
+                    cardWidth,
                   ),
                 );
               },
@@ -104,9 +109,10 @@ class FeaturedStoresSection extends StatelessWidget {
     String subcategory,
     String location,
     String imagePath,
+    double cardWidth,
   ) {
     return Container(
-      width: 180,
+      width: cardWidth,
       height: 208,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -120,12 +126,12 @@ class FeaturedStoresSection extends StatelessWidget {
             child: Image.asset(
               imagePath,
               height: 120,
-              width: 180,
+              width: cardWidth,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
                   height: 120,
-                  width: 180,
+                  width: cardWidth,
                   color: const Color(0xFFF0F0F0),
                   child: const Center(
                     child: Icon(

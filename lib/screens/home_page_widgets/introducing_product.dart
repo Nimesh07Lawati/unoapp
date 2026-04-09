@@ -14,10 +14,10 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
   int _currentPage = 0;
 
   final List<String> titles = [
-    'Rent flexibly and\naffordably—instantly!',
-    'Rent flexibly and\naffordably—instantly!',
-    'Rent flexibly and\naffordably—instantly!',
-    'Rent flexibly and\naffordably—instantly!',
+    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
+    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
+    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
+    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
   ];
 
   @override

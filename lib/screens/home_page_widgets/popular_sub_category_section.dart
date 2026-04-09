@@ -14,6 +14,16 @@ class PopularSubcategoriesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // To show 30% of the third card, we need:
+    // First card FULL width + Second card FULL width + 30% of third card = screen width
+    // So: cardWidth + cardWidth + (cardWidth * 0.3) = screenWidth - horizontalPadding
+    // 2.3 * cardWidth = screenWidth - horizontalPadding
+    // cardWidth = (screenWidth - horizontalPadding) / 2.3
+
+    const horizontalPadding = 32.0; // 16 on left + 16 on right
+    final cardWidth = (screenWidth - horizontalPadding) / 2.3;
+
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -39,7 +49,7 @@ class PopularSubcategoriesSection extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF292D32).withOpacity(0.12),
+                      color: const Color(0xFF292D32).withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
@@ -69,13 +79,13 @@ class PopularSubcategoriesSection extends StatelessWidget {
                 final item = subcategories[index];
 
                 return Container(
-                  width: 156,
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  width: cardWidth,
+                  margin: const EdgeInsets.only(right: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 156,
+                        width: cardWidth,
                         height: 156,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
@@ -85,7 +95,7 @@ class PopularSubcategoriesSection extends StatelessWidget {
                           child: Image.asset(
                             item['image']!,
                             fit: BoxFit.cover,
-                            width: 156,
+                            width: cardWidth,
                             height: 156,
                             errorBuilder: (context, error, stackTrace) {
                               return Container(

@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:unoapp/core/application_style/app_text_style.dart';
-import 'package:go_router/go_router.dart'; // Add this import for navigation
+import 'package:go_router/go_router.dart';
 
 class MostPopularSection extends StatelessWidget {
   const MostPopularSection({super.key});
 
   static const List<Map<String, dynamic>> popularItems = [
-    {
-      'title': 'Premium Sound System',
-      'discount': '32% OFF',
-      'price': '99',
-      'subcategory': 'Audio & Music',
-      'location': 'Surfers Paradise',
-      'image': 'assets/images/product_camera.jpg',
-    },
     {
       'title': 'LED Dance Floor',
       'discount': '25% OFF',
@@ -23,6 +15,15 @@ class MostPopularSection extends StatelessWidget {
       'location': 'Broadbeach',
       'image': 'assets/application_images/dining_hall.jpg',
     },
+    {
+      'title': 'Premium Sound System',
+      'discount': '32% OFF',
+      'price': '99',
+      'subcategory': 'Audio & Music',
+      'location': 'Surfers Paradise',
+      'image': 'assets/images/product_camera.jpg',
+    },
+
     {
       'title': 'Photo Booth',
       'discount': '15% OFF',
@@ -35,6 +36,16 @@ class MostPopularSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // To show 90% of the second card, we need:
+    // First card FULL width + 90% of second card = screen width
+    // So: cardWidth + (cardWidth * 0.9) = screenWidth - horizontalPadding
+    // 1.9 * cardWidth = screenWidth - horizontalPadding
+    // cardWidth = (screenWidth - horizontalPadding) / 1.9
+
+    const horizontalPadding = 32.0; // 16 on left + 16 on right
+    final cardWidth = (screenWidth - horizontalPadding) / 1.9;
+
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -72,7 +83,7 @@ class MostPopularSection extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF292D32).withOpacity(0.12),
+                      color: const Color(0xFF292D32).withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
@@ -102,8 +113,8 @@ class MostPopularSection extends StatelessWidget {
                 final item = popularItems[index];
 
                 return Container(
-                  width: 216,
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  width: cardWidth,
+                  margin: const EdgeInsets.only(right: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
@@ -123,12 +134,12 @@ class MostPopularSection extends StatelessWidget {
                             child: Image.asset(
                               item['image'] as String,
                               height: 216,
-                              width: 216,
+                              width: cardWidth,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
                                   height: 216,
-                                  width: 216,
+                                  width: cardWidth,
                                   color: const Color(0xFFF0F0F0),
                                   child: const Icon(
                                     Icons.celebration,
@@ -138,8 +149,6 @@ class MostPopularSection extends StatelessWidget {
                               },
                             ),
                           ),
-
-                          // Discount badge — flat left, rounded right, anchored to left edge
                           Positioned(
                             top: 12,
                             left: 0,
@@ -188,7 +197,6 @@ class MostPopularSection extends StatelessWidget {
                               style: AppTextStyles.cardSubtitle,
                             ),
                             const SizedBox(height: 4),
-                            // Location row with icon
                             Row(
                               children: [
                                 const Icon(
