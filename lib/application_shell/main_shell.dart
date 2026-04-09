@@ -97,14 +97,11 @@ class MainShell extends StatelessWidget {
             ),
           ),
 
-          // Bottom nav bar with integrated search button
+          // Bottom nav bar with white background
           Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(color: Color(0xFFE0E0E0), width: 1),
-              ),
-            ),
+            color: Colors.white, // Set navigation bar background to white
             child: BottomAppBar(
+              color: Colors.white, // Ensure BottomAppBar is also white
               elevation: 0,
               padding: EdgeInsets.zero,
               child: SizedBox(
@@ -116,12 +113,14 @@ class MainShell extends StatelessWidget {
                       svgPath: 'assets/icons/nav_bar_icons/home.svg',
                       label: 'Home',
                       selected: index == 0,
+                      activeColor: const Color(0xFFD42B65),
                       onTap: () => context.go('/home'),
                     ),
                     NavItem(
                       svgPath: 'assets/icons/nav_bar_icons/note-text.svg',
                       label: 'Categories',
                       selected: index == 1,
+                      activeColor: const Color(0xFFD42B65),
                       onTap: () => context.go('/categories'),
                     ),
 
@@ -161,12 +160,14 @@ class MainShell extends StatelessWidget {
                       svgPath: 'assets/icons/nav_bar_icons/calendar.svg',
                       label: 'Booking',
                       selected: index == 3,
+                      activeColor: const Color(0xFFD42B65),
                       onTap: () => context.go('/booking'),
                     ),
                     NavItem(
                       svgPath: 'assets/icons/nav_bar_icons/chat.svg',
                       label: 'Chat',
                       selected: index == 4,
+                      activeColor: const Color(0xFFD42B65),
                       onTap: () => context.go('/chat'),
                     ),
                   ],

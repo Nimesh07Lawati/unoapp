@@ -28,12 +28,6 @@ class PartyHireSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    // To show 90% of the second card, we need:
-    // First card FULL width + 90% of second card = screen width
-    // So: cardWidth + (cardWidth * 0.9) = screenWidth - horizontalPadding
-    // 1.9 * cardWidth = screenWidth - horizontalPadding
-    // cardWidth = (screenWidth - horizontalPadding) / 1.9
-
     const horizontalPadding = 32.0; // 16 on left + 16 on right
     final cardWidth = (screenWidth - horizontalPadding) / 1.9;
 
