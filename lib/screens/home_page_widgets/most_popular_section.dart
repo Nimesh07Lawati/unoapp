@@ -113,6 +113,8 @@ class MostPopularSection extends StatelessWidget {
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(12),
                               topRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                              bottomRight: Radius.circular(12),
                             ),
                             child: Image.asset(
                               item['image'] as String,
@@ -147,13 +149,9 @@ class MostPopularSection extends StatelessWidget {
                               decoration: const BoxDecoration(
                                 color: Color(0xFFD42B65), // ✅ Figma color
                                 borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(
-                                    47.4,
-                                  ), // ✅ Figma border-top-right-radius
-                                  bottomRight: Radius.circular(
-                                    47.4,
-                                  ), // ✅ Figma border-bottom-right-radius
-                                  topLeft: Radius.zero, // ✅ Flat left edge
+                                  topRight: Radius.circular(47.4), //
+                                  bottomRight: Radius.circular(47.4),
+                                  topLeft: Radius.zero,
                                   bottomLeft: Radius.zero, // ✅ Flat left edge
                                 ),
                               ),

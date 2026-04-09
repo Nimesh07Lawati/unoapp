@@ -92,6 +92,8 @@ class PartyHireSection extends StatelessWidget {
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(12),
                               topRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                              bottomRight: Radius.circular(12),
                             ),
                             child: Image.asset(
                               item['image'] as String,

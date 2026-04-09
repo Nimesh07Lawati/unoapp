@@ -12,7 +12,7 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
   int _currentPage = 0;
 
   final List<String> titles = [
-    'Rent flexibly and affordably—instantly!',
+    'Rent flexibly and \n affordably—instantly!',
     'Get the latest tech gadgets today',
     'Premium event gear for your party',
     'Professional tools for every job',
@@ -94,15 +94,21 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Rentsy Logo instead of text
+              // Rentsy Logo with color #D42B65
               SizedBox(
                 width: 80.58,
                 height: 37.92,
-                child: Image.asset(
-                  'assets/application_images/rentsy_logo.png',
-                  width: 80.58,
-                  height: 37.92,
-                  fit: BoxFit.contain,
+                child: ColorFiltered(
+                  colorFilter: const ColorFilter.mode(
+                    Color(0xFFD42B65),
+                    BlendMode.srcIn,
+                  ),
+                  child: Image.asset(
+                    'assets/application_images/rentsy_logo.png',
+                    width: 80.58,
+                    height: 37.92,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),

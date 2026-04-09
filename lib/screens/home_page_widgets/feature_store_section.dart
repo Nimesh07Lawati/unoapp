@@ -105,7 +105,6 @@ class FeaturedStoresSection extends StatelessWidget {
     return Container(
       width: 180,
       height: 208,
-      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),

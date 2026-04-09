@@ -31,6 +31,7 @@ class MainShell extends StatelessWidget {
 
     return Scaffold(
       body: child,
+      extendBody: true,
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

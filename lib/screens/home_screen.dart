@@ -13,45 +13,28 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Main scrollable content
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 16),
-                    // Header with greeting and profile
-                    const HomeHeader(),
-                    const SizedBox(height: 24),
-                    // Categories Section
-                    const CategoriesSection(),
-                    const SizedBox(height: 24),
-                    // Introducing Product Card
-                    const IntroducingProductCard(),
-                    const SizedBox(height: 32),
-                    // Most Popular Section
-                    const MostPopularSection(),
-                    const SizedBox(height: 32),
-                    // Popular Subcategories
-                    const PopularSubcategoriesSection(),
-                    const SizedBox(height: 32),
-                    const ProductBannersSection(),
-                    const SizedBox(height: 32),
-                    const PartyHireSection(),
-                    const SizedBox(height: 32),
-                    const FeaturedStoresSection(),
-                    const SizedBox(height: 24),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 16),
+          const HomeHeader(),
+          const SizedBox(height: 24),
+          const CategoriesSection(),
+          const SizedBox(height: 24),
+          const IntroducingProductCard(),
+          const SizedBox(height: 24),
+          const MostPopularSection(),
+          const SizedBox(height: 24),
+          const PopularSubcategoriesSection(),
+          const SizedBox(height: 24),
+          const ProductBannersSection(),
+          const SizedBox(height: 24),
+          const PartyHireSection(),
+          const SizedBox(height: 24),
+          const FeaturedStoresSection(),
+          const SizedBox(height: 150),
+        ],
       ),
     );
   }
