@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:unoapp/core/application_style/app_text_style.dart';
+import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
+import 'package:unoapp/gen/assets.gen.dart';
 
 class IntroducingProductCard extends StatefulWidget {
   const IntroducingProductCard({super.key});
@@ -14,10 +14,10 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
   int _currentPage = 0;
 
   final List<String> titles = [
-    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
-    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
-    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
-    'Rent flexibly and\naffordably—instantly!\n and this is the longer version to test the overflow',
+    'Rent flexibly and affordably—instantly!',
+    'Upgrade your lifestyle with ease',
+    'Best gear for your next adventure',
+    'Simple, fast, and secure rentals',
   ];
 
   @override
@@ -29,14 +29,8 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
           PageView.builder(
             controller: _pageController,
             itemCount: titles.length,
-            onPageChanged: (index) {
-              setState(() {
-                _currentPage = index;
-              });
-            },
-            itemBuilder: (context, index) {
-              return _buildCard(titles[index]);
-            },
+            onPageChanged: (index) => setState(() => _currentPage = index),
+            itemBuilder: (context, index) => _buildCard(titles[index]),
           ),
           Positioned(
             bottom: 16,
@@ -70,24 +64,21 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
-        width: double.infinity, // Changed from fixed width to flexible
-        height: 182,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          image: const DecorationImage(
-            image: AssetImage('assets/images/man_surfing.jpg'),
+          // Using generated asset image provider
+          image: DecorationImage(
+            image: Assets.images.manSurfing.image().image,
             fit: BoxFit.cover,
           ),
         ),
         child: Container(
-          width: double.infinity, // Changed from fixed width to flexible
-          height: 182,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Color(0xFFF9F9F9).withValues(alpha: 0.16),
+            color: const Color(0xFFF9F9F9).withValues(alpha: 0.16),
           ),
           padding: const EdgeInsets.only(
-            left: 23.42,
+            left: 23,
             top: 30,
             right: 24,
             bottom: 24,
@@ -96,25 +87,20 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Rentsy Logo with color #D42B65
-              SizedBox(
-                width: 80.58,
-                height: 37.92,
-                child: ColorFiltered(
-                  colorFilter: const ColorFilter.mode(
-                    Color(0xFFD42B65),
-                    BlendMode.srcIn,
-                  ),
-                  child: Image.asset(
-                    'assets/application_images/rentsy_logo.png',
-                    width: 80.58,
-                    height: 37.92,
-                    fit: BoxFit.contain,
-                  ),
+              // Logo color filter
+              ColorFiltered(
+                colorFilter: const ColorFilter.mode(
+                  Color(0xFFD42B65),
+                  BlendMode.srcIn,
+                ),
+                child: Assets.applicationImages.rentsyLogo.image(
+                  width: 80.58,
+                  height: 37.92,
+                  fit: BoxFit.contain,
                 ),
               ),
               const SizedBox(height: 8),
-              Flexible(
+              Expanded(
                 child: Text(
                   title,
                   style: AppTextStyles.bannerLabel,
@@ -143,8 +129,8 @@ class _IntroducingProductCardState extends State<IntroducingProductCard> {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    SvgPicture.asset(
-                      'assets/icons/hire_now_arrow_icon.svg',
+                    // Using generated SVG asset
+                    Assets.icons.hireNowArrowIcon.svg(
                       width: 8,
                       height: 8,
                       colorFilter: const ColorFilter.mode(

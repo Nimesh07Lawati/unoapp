@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unoapp/widgets/nav_items.dart';
+import 'package:unoapp/application_shell/text_style/shell_text_style.dart';
+import 'package:unoapp/application_shell/widgets/nav_items.dart';
+import 'package:unoapp/core/router/route_pathts.dart';
+import 'package:unoapp/gen/assets.gen.dart';
+import 'package:unoapp/gen/colors.gen.dart';
 
 class MainShell extends StatelessWidget {
   final Widget child;
@@ -39,7 +43,9 @@ class MainShell extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 64,
-            color: const Color(0xFF101B30).withValues(alpha: 0.7),
+            color: ColorName.cardTitle.withValues(
+              alpha: 0.7,
+            ), // Using generated color (#101B30)
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,14 +55,7 @@ class MainShell extends StatelessWidget {
                 const Expanded(
                   child: Text(
                     'Sign in for faster bookings, saved preferences, and personalised recommendations.',
-                    style: TextStyle(
-                      fontFamily: 'PublicSans',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      height: 20 / 12,
-                      letterSpacing: 0,
-                      color: Colors.white,
-                    ),
+                    style: ShellTextStyles.bannerText, // Using separated style
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -84,12 +83,7 @@ class MainShell extends StatelessWidget {
                     ),
                     child: const Text(
                       'Sign In',
-                      style: TextStyle(
-                        fontFamily: 'PublicSans',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: Colors.white,
-                      ),
+                      style: ShellTextStyles.signInButtonText,
                     ),
                   ),
                 ),
@@ -99,9 +93,9 @@ class MainShell extends StatelessWidget {
 
           // Bottom nav bar with white background
           Container(
-            color: Colors.white, // Set navigation bar background to white
+            color: ColorName.cardBackground,
             child: BottomAppBar(
-              color: Colors.white, // Ensure BottomAppBar is also white
+              color: ColorName.cardBackground,
               elevation: 0,
               padding: EdgeInsets.zero,
               child: SizedBox(
@@ -110,23 +104,24 @@ class MainShell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     NavItem(
-                      svgPath: 'assets/icons/nav_bar_icons/home.svg',
+                      svgPath: Assets.icons.navBarIcons.home.path,
                       label: 'Home',
                       selected: index == 0,
-                      activeColor: const Color(0xFFD42B65),
-                      onTap: () => context.go('/home'),
+                      activeColor:
+                          ColorName.cardDiscountTag, // Using generated color
+                      onTap: () => context.go(RoutePaths.home),
                     ),
                     NavItem(
-                      svgPath: 'assets/icons/nav_bar_icons/note-text.svg',
+                      svgPath: Assets.icons.navBarIcons.noteText.path,
                       label: 'Categories',
                       selected: index == 1,
-                      activeColor: const Color(0xFFD42B65),
-                      onTap: () => context.go('/categories'),
+                      activeColor: ColorName.cardDiscountTag,
+                      onTap: () => context.go(RoutePaths.categories),
                     ),
 
                     // Center Search Button (part of nav bar)
                     GestureDetector(
-                      onTap: () => context.go('/search'),
+                      onTap: () => context.go(RoutePaths.search),
                       child: Container(
                         width: 56,
                         height: 56,
@@ -157,18 +152,28 @@ class MainShell extends StatelessWidget {
                     ),
 
                     NavItem(
-                      svgPath: 'assets/icons/nav_bar_icons/calendar.svg',
+                      svgPath: Assets
+                          .icons
+                          .navBarIcons
+                          .calendar
+                          .path, // Using generated asset
                       label: 'Booking',
                       selected: index == 3,
-                      activeColor: const Color(0xFFD42B65),
-                      onTap: () => context.go('/booking'),
+                      activeColor:
+                          ColorName.cardDiscountTag, // Using generated color
+                      onTap: () => context.go(RoutePaths.booking),
                     ),
                     NavItem(
-                      svgPath: 'assets/icons/nav_bar_icons/chat.svg',
+                      svgPath: Assets
+                          .icons
+                          .navBarIcons
+                          .chat
+                          .path, // Using generated asset
                       label: 'Chat',
                       selected: index == 4,
-                      activeColor: const Color(0xFFD42B65),
-                      onTap: () => context.go('/chat'),
+                      activeColor:
+                          ColorName.cardDiscountTag, // Using generated color
+                      onTap: () => context.go(RoutePaths.chat),
                     ),
                   ],
                 ),
