@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unoapp/core/application_theme/color.dart';
-import 'package:unoapp/router/app_routes.dart';
+import 'package:unoapp/core/router/app_router.dart';
 
 void main() {
   runApp(const MyApp());
