@@ -1,35 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:unoapp/gen/assets.gen.dart';
+
+class BannerItem {
+  final String title;
+  final String subtitle;
+  final AssetGenImage image;
+
+  BannerItem({
+    required this.title,
+    required this.subtitle,
+    required this.image,
+  });
+}
 
 class ProductBannersSection extends StatelessWidget {
   const ProductBannersSection({super.key});
 
-  final List<Map<String, String>> banners = const [
-    {
-      'title': 'Xiaomi Mi 11 Ultra',
-      'subtitle': '12GB+256GB',
-      'image': 'assets/images/bike.png',
-    },
-    {
-      'title': 'Pro Camera Kit',
-      'subtitle': 'Lens + Body',
-      'image': 'assets/images/bike.png',
-    },
+  static final List<BannerItem> banners = [
+    BannerItem(
+      title: 'Xiaomi Mi 11 Ultra',
+      subtitle: '12GB+256GB',
+      image: Assets.images.bike,
+    ),
+    BannerItem(
+      title: 'Pro Camera Kit',
+      subtitle: 'Lens + Body',
+      image: Assets.images.bike,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    // To show 40% of the second banner, we need:
-    // First banner FULL width + 40% of second banner = screen width
-    // So: bannerWidth + (bannerWidth * 0.4) = screenWidth - horizontalPadding
-    // 1.4 * bannerWidth = screenWidth - horizontalPadding
-    // bannerWidth = (screenWidth - horizontalPadding) / 1.4
-
-    const horizontalPadding = 32.0; // 16 on left + 16 on right
-    final bannerWidth = (screenWidth - horizontalPadding) / 1.4;
+    // 1.4 divisor to create the 40% peek effect
+    final double bannerWidth = (MediaQuery.sizeOf(context).width - 32) / 1.4;
 
     return Container(
-      color: Colors.white, // ✅ White background
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: SizedBox(
         height: 200,
@@ -37,18 +43,13 @@ class ProductBannersSection extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           itemCount: banners.length,
-          itemBuilder: (context, index) {
-            final item = banners[index];
-            return Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: SingleBannerCard(
-                title: item['title']!,
-                subtitle: item['subtitle']!,
-                imagePath: item['image']!,
-                bannerWidth: bannerWidth,
-              ),
-            );
-          },
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: SingleBannerCard(
+              item: banners[index],
+              bannerWidth: bannerWidth,
+            ),
+          ),
         ),
       ),
     );
@@ -58,15 +59,11 @@ class ProductBannersSection extends StatelessWidget {
 class SingleBannerCard extends StatelessWidget {
   const SingleBannerCard({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.imagePath,
+    required this.item,
     required this.bannerWidth,
   });
 
-  final String title;
-  final String subtitle;
-  final String imagePath;
+  final BannerItem item;
   final double bannerWidth;
 
   @override
@@ -81,10 +78,11 @@ class SingleBannerCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Stack(
         children: [
+          // Using generated asset image
           Positioned(
             right: -20,
             bottom: -10,
-            child: Image.asset(imagePath, height: 160, fit: BoxFit.contain),
+            child: item.image.image(height: 160, fit: BoxFit.contain),
           ),
           Padding(
             padding: const EdgeInsets.all(20),
@@ -112,7 +110,7 @@ class SingleBannerCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  '$title\n$subtitle',
+                  '${item.title}\n${item.subtitle}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

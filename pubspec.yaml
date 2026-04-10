@@ -12,54 +12,33 @@ dependencies:
   cupertino_icons: ^1.0.8
   go_router: ^17.0.0
   flutter_svg: ^2.0.10
+  flutter_gen: ^5.13.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_gen_runner: ^5.13.0+1
+  build_runner: ^2.13.1
 
 flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/skateboard.jpg
-    - assets/images/sound_card.jpg
-    - assets/images/vintage_sound_system.jpg
-    - assets/images/led_dance_floor.jpg
-    - assets/images/yacht.jpg
-    - assets/store_images/camera_store.jpg
-    - assets/store_images/cloath_store.jpg
-    - assets/store_images/musical_store.jpg
-    - assets/icons/arrow-right.svg
-    - assets/icons/expand.svg
-    - assets/icons/growth_arrow.svg
-    - assets/icons/location.svg
-    - assets/icons/menu.svg
-    - assets/icons/chevronleft.svg
-    - assets/icons/message.svg
-    - assets/icons/nav_bar_icons/home.svg
-    - assets/icons/nav_bar_icons/chat.svg
-    - assets/icons/nav_bar_icons/calendar.svg
-    - assets/icons/nav_bar_icons/note-text.svg
+    - assets/images/
+    - assets/store_images/
+    - assets/icons/
+    - assets/icons/nav_bar_icons/
     - assets/fonts/PublicSans-Regular.ttf
     - assets/fonts/PublicSans-SemiBold.ttf
-    - assets/application_images/car.jpg
-    - assets/application_images/date_table.jpg
-    - assets/application_images/dining_hall.jpg
-    - assets/application_images/tools.jpg
-    - assets/application_images/water_sports.jpg
-    - assets/application_images/wedding.jpg
-    - assets/application_images/girl_in_car.jpg
-    - assets/application_images/girl_in_car_two.jpg
-    - assets/application_images/rentsy_logo.png
-    - assets/images/product_camera.jpg
-    - assets/images/man_surfing.jpg
-    - assets/images/party.jpg
-    - assets/images/audio_mixer.jpg
-    - assets/images/bike.png
-    - assets/images/first_store.jpg
-    - assets/icons/hire_now_arrow_icon.svg
+    - assets/application_images/
 
+flutter_gen:
+  output: lib/gen/ # Where the generated files will live
+  integrations:
+    flutter_svg: true 
 
-
+  colors:
+    inputs:
+      - assets/colors/colors.xml
   

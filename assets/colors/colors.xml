@@ -1,0 +1,13 @@
+<resources>
+  <color name="info-card">#D1E0FF</color>
+  <color name="button-primary">#F4F5F7</color>
+  <color name="button-secondary">#101B30</color>
+  <color name="card-title">#101B30</color>
+  <color name="card-subtitle">#404959</color>
+  <color name="card-location-label">#707683</color>
+  <color name="card-price">#D42B65</color>
+
+<color name="card-discount-tag">#D42B65</color>
+<color name="secton-title">#101B30</color>
+
+</resources>
