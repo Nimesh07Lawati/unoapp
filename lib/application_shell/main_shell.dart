@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unoapp/widgets/nav_items.dart';
+import 'package:unoapp/application_shell/widgets/nav_items.dart';
 
 class MainShell extends StatelessWidget {
   final Widget child;
