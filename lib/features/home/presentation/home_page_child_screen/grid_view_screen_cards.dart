@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
-import 'package:unoapp/core/application_theme/color.dart';
+import 'package:unoapp/gen/colors.gen.dart';
+import 'package:unoapp/gen/assets.gen.dart';
 
 class GridViewScreencards extends StatelessWidget {
   GridViewScreencards({super.key});
@@ -9,35 +10,36 @@ class GridViewScreencards extends StatelessWidget {
   final int resultsCount = 86;
   final String searchQuery = 'Wedding';
 
-  final List<Map<String, dynamic>> rentalItems = [
-    {
-      'title': 'Luxury Wedding Venue',
-      'subcategory': 'Event Space',
-      'price': 'From 499',
-      'location': 'Kathmandu, Nepal',
-      'image': 'assets/application_images/wedding.jpg',
-    },
-    {
-      'title': 'Luxury Car Rental',
-      'subcategory': 'Transportation',
-      'price': 'From 299',
-      'location': 'Lalitpur, Nepal',
-      'image': 'assets/application_images/girl_in_car.jpg',
-    },
-    {
-      'title': 'Luxury Car Rental',
-      'subcategory': 'Transportation',
-      'price': 'From 299',
-      'location': 'Lalitpur, Nepal',
-      'image': 'assets/application_images/girl_in_car.jpg',
-    },
-    {
-      'title': 'Luxury Car Rental',
-      'subcategory': 'Transportation',
-      'price': 'From 299',
-      'location': 'Lalitpur, Nepal',
-      'image': 'assets/application_images/girl_in_car.jpg',
-    },
+  // Define rental items using generated assets
+  final List<RentalItem> rentalItems = [
+    RentalItem(
+      title: 'Luxury Wedding Venue',
+      subcategory: 'Event Space',
+      price: 'From 499',
+      location: 'Kathmandu, Nepal',
+      image: Assets.applicationImages.wedding, // Using generated asset
+    ),
+    RentalItem(
+      title: 'Luxury Car Rental',
+      subcategory: 'Transportation',
+      price: 'From 299',
+      location: 'Lalitpur, Nepal',
+      image: Assets.applicationImages.girlInCar, // Using generated asset
+    ),
+    RentalItem(
+      title: 'Luxury Car Rental',
+      subcategory: 'Transportation',
+      price: 'From 299',
+      location: 'Lalitpur, Nepal',
+      image: Assets.applicationImages.girlInCar, // Using generated asset
+    ),
+    RentalItem(
+      title: 'Luxury Car Rental',
+      subcategory: 'Transportation',
+      price: 'From 299',
+      location: 'Lalitpur, Nepal',
+      image: Assets.applicationImages.girlInCar, // Using generated asset
+    ),
   ];
 
   void _handleBack(BuildContext context) {
@@ -55,7 +57,7 @@ class GridViewScreencards extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.appBackgroundColor,
+        backgroundColor: ColorName.applicationBackgroundColor,
         body: Stack(
           children: [
             SafeArea(
@@ -63,7 +65,7 @@ class GridViewScreencards extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    color: AppColors.appBackgroundColor,
+                    color: ColorName.applicationBackgroundColor,
                     padding: const EdgeInsets.only(
                       top: 80,
                       left: 24,
@@ -130,7 +132,7 @@ class GridViewScreencards extends StatelessWidget {
     );
   }
 
-  Widget _buildRentalCard(Map<String, dynamic> item) {
+  Widget _buildRentalCard(RentalItem item) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -146,10 +148,21 @@ class GridViewScreencards extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
-              child: Image.asset(
-                item['image'],
+              child: item.image.image(
                 fit: BoxFit.cover,
                 width: double.infinity,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: const Color(0xFFF0F0F0),
+                    child: const Center(
+                      child: Icon(
+                        Icons.image_not_supported,
+                        size: 32,
+                        color: Color(0xFFCCCCCC),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -162,7 +175,7 @@ class GridViewScreencards extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item['title'],
+                    item.title,
                     style: AppTextStyles.cardTitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -170,7 +183,7 @@ class GridViewScreencards extends StatelessWidget {
 
                   const SizedBox(height: 4),
 
-                  Text(item['subcategory'], style: AppTextStyles.cardSubtitle),
+                  Text(item.subcategory, style: AppTextStyles.cardSubtitle),
 
                   const SizedBox(height: 4),
 
@@ -179,12 +192,12 @@ class GridViewScreencards extends StatelessWidget {
                       const Icon(
                         Icons.location_on,
                         size: 12,
-                        color: Colors.grey,
+                        color: Color(0xFF9E9E9E), // Using consistent color
                       ),
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          item['location'],
+                          item.location,
                           style: AppTextStyles.cardLocation,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -195,7 +208,7 @@ class GridViewScreencards extends StatelessWidget {
 
                   const Spacer(),
 
-                  Text(item['price'], style: AppTextStyles.priceLabel),
+                  Text(item.price, style: AppTextStyles.priceLabel),
                 ],
               ),
             ),
@@ -204,4 +217,21 @@ class GridViewScreencards extends StatelessWidget {
       ),
     );
   }
+}
+
+// Create a model for rental items
+class RentalItem {
+  final String title;
+  final String subcategory;
+  final String price;
+  final String location;
+  final AssetGenImage image; // Using generated type from flutter_gen
+
+  RentalItem({
+    required this.title,
+    required this.subcategory,
+    required this.price,
+    required this.location,
+    required this.image,
+  });
 }

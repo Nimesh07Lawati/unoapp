@@ -1,6 +1,7 @@
 <resources>
 
   <color name="application-background-color">#F9F9F9</color>
+  <color name="notice-background">#D1E0FF</color>
   <color name="info_card">#D1E0FF</color>
   <color name="button_primary">#F4F5F7</color>
   <color name="button_secondary">#101B30</color>

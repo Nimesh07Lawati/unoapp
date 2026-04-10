@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unoapp/core/application_theme/color.dart';
 import 'package:unoapp/core/router/app_router.dart';
 import 'package:unoapp/gen/colors.gen.dart';
 

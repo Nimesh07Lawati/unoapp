@@ -50,6 +50,9 @@ class ColorName {
   /// Color: #888D98
   static const Color navItemInactive = Color(0xFF888D98);
 
+  /// Color: #D1E0FF
+  static const Color noticeBackground = Color(0xFFD1E0FF);
+
   /// Color: #101B30
   static const Color sectionTitle = Color(0xFF101B30);
 }

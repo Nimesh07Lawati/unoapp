@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_button_styles.dart';
-import 'package:unoapp/core/application_theme/color.dart';
+import 'package:unoapp/gen/colors.gen.dart';
 import 'package:unoapp/gen/assets.gen.dart'; // Import generated assets
 
 class HomeHeader extends StatelessWidget {
@@ -39,7 +39,7 @@ class HomeHeader extends StatelessWidget {
         const SizedBox(height: 16),
         Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(color: AppColors.noticeBackgroundColor),
+          decoration: BoxDecoration(color: ColorName.noticeBackground),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
