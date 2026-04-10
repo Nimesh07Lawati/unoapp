@@ -20,7 +20,6 @@ class CategoriesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ... (Header code remains the same)
         SizedBox(
           height: 100,
           child: ListView.builder(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:unoapp/gen/colors.gen.dart';
 
 class NavItem extends StatelessWidget {
   final String svgPath;
@@ -15,8 +16,8 @@ class NavItem extends StatelessWidget {
     required this.label,
     required this.selected,
     required this.onTap,
-    this.activeColor = const Color(0xFFD42B65),
-    this.inactiveColor = Colors.grey,
+    this.activeColor = ColorName.navItemActive,
+    this.inactiveColor = ColorName.navItemInactive,
   });
 
   @override

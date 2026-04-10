@@ -37,6 +37,7 @@ flutter_gen:
   output: lib/gen/ # Where the generated files will live
   integrations:
     flutter_svg: true 
+    
 
   colors:
     inputs:
