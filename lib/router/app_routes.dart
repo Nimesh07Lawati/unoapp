@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unoapp/application_shell/main_shell.dart';
 import 'package:unoapp/screens/Home_screen.dart';
-import 'package:unoapp/screens/booking_screen.dart';
-import 'package:unoapp/screens/categories_screen.dart';
-import 'package:unoapp/screens/chat_screen.dart';
-import 'package:unoapp/screens/child_screens/grid_view_screen_cards.dart';
-import 'package:unoapp/screens/search_screen.dart';
+import 'package:unoapp/features/booking/booking_screen.dart';
+import 'package:unoapp/features/categories/categories_screen.dart';
+import 'package:unoapp/features/chat/chat_screen.dart';
+import 'package:unoapp/features/home/grid_view_screen_cards.dart';
+import 'package:unoapp/features/search/search_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
