@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unoapp/core/extensions/context_extensions.dart';
 import 'package:unoapp/gen/assets.gen.dart';
 
 class BannerItem {
@@ -32,7 +33,7 @@ class ProductBannersSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 1.4 divisor to create the 40% peek effect
-    final double bannerWidth = (MediaQuery.sizeOf(context).width - 32) / 1.4;
+    final double bannerWidth = (context.screenWidth - 32) / 1.4;
 
     return Container(
       color: Colors.white,

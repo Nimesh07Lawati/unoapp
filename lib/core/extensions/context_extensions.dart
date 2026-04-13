@@ -5,19 +5,17 @@ extension MediaQueryValues on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
   // Screen dimensions
-  double get screenWidth => MediaQuery.of(this).size.width;
-  double get screenHeight => MediaQuery.of(this).size.height;
+  double get screenWidth => mediaQuery.size.width;
+  double get screenHeight => mediaQuery.size.height;
 
   // Screen orientation
-  bool get isLandscape =>
-      MediaQuery.of(this).orientation == Orientation.landscape;
-  bool get isPortrait =>
-      MediaQuery.of(this).orientation == Orientation.portrait;
+  bool get isLandscape => mediaQuery.orientation == Orientation.landscape;
+  bool get isPortrait => mediaQuery.orientation == Orientation.portrait;
 
   // Safe area values
-  double get statusBarHeight => MediaQuery.of(this).padding.top;
-  double get bottomBarHeight => MediaQuery.of(this).padding.bottom;
-  double get keyboardHeight => MediaQuery.of(this).viewInsets.bottom;
+  double get statusBarHeight => mediaQuery.padding.top;
+  double get bottomBarHeight => mediaQuery.padding.bottom;
+  double get keyboardHeight => mediaQuery.viewInsets.bottom;
 
   // Device type detection
   bool get isTablet => screenWidth >= 600;
@@ -30,9 +28,9 @@ extension MediaQueryValues on BuildContext {
       screenHeight * (percentage / 100);
 
   // Text scaling
-  double get textScaleFactor => MediaQuery.of(this).textScaleFactor;
+  TextScaler get textScaler => mediaQuery.textScaler;
 
   // Brightness
-  Brightness get platformBrightness => MediaQuery.of(this).platformBrightness;
+  Brightness get platformBrightness => mediaQuery.platformBrightness;
   bool get isDarkMode => platformBrightness == Brightness.dark;
 }
