@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
 import 'package:unoapp/gen/assets.gen.dart';
+import 'package:unoapp/widgets/cards.dart';
 
 class SubcategoryItem {
   final String title;
@@ -21,7 +22,6 @@ class PopularSubcategoriesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Math: 2.3 items visible
     final double cardWidth = (MediaQuery.sizeOf(context).width - 32) / 2.3;
 
     return Container(
@@ -84,29 +84,10 @@ class PopularSubcategoriesSection extends StatelessWidget {
   }
 
   Widget _buildCard(SubcategoryItem item, double width) {
-    return Container(
+    return HireCard.subcategory(
+      image: item.image,
       width: width,
-      margin: const EdgeInsets.only(right: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: item.image.image(
-              width: width,
-              height: 156,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            item.title,
-            style: AppTextStyles.cardTitle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
+      title: item.title,
     );
   }
 }
