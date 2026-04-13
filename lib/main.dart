@@ -1,5 +1,8 @@
+// lib/main.dart or your main app file
 import 'package:flutter/material.dart';
-import 'package:unoapp/core/router/app_router.dart';
+import 'package:get/get.dart';
+import 'package:unoapp/core/router/getx_app_router.dart';
+import 'package:unoapp/features/unknown_page/unknown_page.dart';
 import 'package:unoapp/gen/colors.gen.dart';
 
 void main() {
@@ -11,12 +14,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp(
+      title: 'UnoApp',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: ColorName.applicationBackgroundColor,
+      themeMode: ThemeMode.light,
+
+      // Routing configuration
+      initialRoute: GetxAppRoutes.initialRoute,
+      getPages: GetxAppRoutes.routes,
+
+      // Optional: Add unknown route handler
+      unknownRoute: GetPage(
+        name: '/not-found',
+        page: () => const NotFoundScreen(),
+        transition: Transition.fade,
       ),
-      routerConfig: AppRouter.router,
+
+      // Theme configuration
+      theme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: ColorName.applicationBackgroundColor,
+        colorScheme: ColorScheme.light(
+          surface: ColorName.applicationBackgroundColor,
+        ),
+      ),
+      // Optional: Route observers for analytics
+      routingCallback: (routing) {
+        // Track route changes for analytics
+        debugPrint('Navigating to: ${routing?.current}');
+      },
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 import 'package:unoapp/application_shell/text_style/shell_text_style.dart';
 import 'package:unoapp/application_shell/widgets/nav_items.dart';
-import 'package:unoapp/core/router/route_pathts.dart';
+import 'package:unoapp/core/router/route_name.dart';
 import 'package:unoapp/gen/assets.gen.dart';
 import 'package:unoapp/gen/colors.gen.dart';
 
@@ -11,17 +11,17 @@ class MainShell extends StatelessWidget {
 
   const MainShell({super.key, required this.child});
 
-  int _selectedIndex(String location) {
-    switch (location) {
-      case '/home':
+  int _selectedIndex(String currentRoute) {
+    switch (currentRoute) {
+      case RouteNames.home:
         return 0;
-      case '/categories':
+      case RouteNames.categories:
         return 1;
-      case '/search':
+      case RouteNames.search:
         return 2;
-      case '/booking':
+      case RouteNames.booking:
         return 3;
-      case '/chat':
+      case RouteNames.chat:
         return 4;
       default:
         return 0;
@@ -30,8 +30,8 @@ class MainShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final location = GoRouterState.of(context).uri.toString();
-    final index = _selectedIndex(location);
+    // GetX router exposes currentRoute as a proper observable this way
+    final index = _selectedIndex(Get.currentRoute);
 
     return Scaffold(
       body: SafeArea(top: true, bottom: false, child: child),
@@ -39,30 +39,25 @@ class MainShell extends StatelessWidget {
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Sign In banner sits just above the nav bar
+          // Sign In banner
           Container(
             width: double.infinity,
             height: 64,
-            color: ColorName.cardTitle.withValues(
-              alpha: 0.7,
-            ), // Using generated color (#101B30)
+            color: ColorName.cardTitle.withValues(alpha: 0.7),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Left side text
                 const Expanded(
                   child: Text(
                     'Sign in for faster bookings, saved preferences, and personalised recommendations.',
-                    style: ShellTextStyles.bannerText, // Using separated style
+                    style: ShellTextStyles.bannerText,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(width: 12),
-
-                // Sign In button
                 SizedBox(
                   width: 79,
                   height: 32,
@@ -91,7 +86,7 @@ class MainShell extends StatelessWidget {
             ),
           ),
 
-          // Bottom nav bar with white background
+          // Bottom nav bar
           Container(
             color: ColorName.cardBackground,
             child: BottomAppBar(
@@ -107,21 +102,18 @@ class MainShell extends StatelessWidget {
                       svgPath: Assets.icons.navBarIcons.home.path,
                       label: 'Home',
                       selected: index == 0,
-                      activeColor:
-                          ColorName.cardDiscountTag, // Using generated color
-                      onTap: () => context.go(RoutePaths.home),
+                      activeColor: ColorName.navItemActive,
+                      onTap: () => _navigateToRoute(RouteNames.home),
                     ),
                     NavItem(
                       svgPath: Assets.icons.navBarIcons.noteText.path,
                       label: 'Categories',
                       selected: index == 1,
-                      activeColor: ColorName.cardDiscountTag,
-                      onTap: () => context.go(RoutePaths.categories),
+                      activeColor: ColorName.navItemActive,
+                      onTap: () => _navigateToRoute(RouteNames.categories),
                     ),
-
-                    // Center Search Button (part of nav bar)
                     GestureDetector(
-                      onTap: () => context.go(RoutePaths.search),
+                      onTap: () => _navigateToRoute(RouteNames.search),
                       child: Container(
                         width: 56,
                         height: 56,
@@ -150,30 +142,19 @@ class MainShell extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     NavItem(
-                      svgPath: Assets
-                          .icons
-                          .navBarIcons
-                          .calendar
-                          .path, // Using generated asset
+                      svgPath: Assets.icons.navBarIcons.calendar.path,
                       label: 'Booking',
                       selected: index == 3,
-                      activeColor:
-                          ColorName.cardDiscountTag, // Using generated color
-                      onTap: () => context.go(RoutePaths.booking),
+                      activeColor: ColorName.navItemActive,
+                      onTap: () => _navigateToRoute(RouteNames.booking),
                     ),
                     NavItem(
-                      svgPath: Assets
-                          .icons
-                          .navBarIcons
-                          .chat
-                          .path, // Using generated asset
+                      svgPath: Assets.icons.navBarIcons.chat.path,
                       label: 'Chat',
                       selected: index == 4,
-                      activeColor:
-                          ColorName.cardDiscountTag, // Using generated color
-                      onTap: () => context.go(RoutePaths.chat),
+                      activeColor: ColorName.navItemActive,
+                      onTap: () => _navigateToRoute(RouteNames.chat),
                     ),
                   ],
                 ),
@@ -183,5 +164,10 @@ class MainShell extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _navigateToRoute(String routeName) {
+    if (Get.currentRoute == routeName) return;
+    Get.offNamed(routeName);
   }
 }
