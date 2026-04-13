@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:unoapp/core/extensions/context_extensions.dart';
 import 'package:unoapp/core/router/route_pathts.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
 import 'package:unoapp/gen/assets.gen.dart';
@@ -45,9 +46,8 @@ class FeaturedStoresSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     const horizontalPadding = 40.0;
-    final cardWidth = (screenWidth - horizontalPadding) / 2.2;
+    final cardWidth = (context.screenWidth - horizontalPadding) / 2.2;
 
     return Container(
       color: Colors.white,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_button_styles.dart';
 import 'package:unoapp/gen/colors.gen.dart';
-import 'package:unoapp/gen/assets.gen.dart'; // Import generated assets
+import 'package:unoapp/gen/assets.gen.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});

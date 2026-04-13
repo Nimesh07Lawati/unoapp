@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:unoapp/core/extensions/context_extensions.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
 import 'package:unoapp/gen/assets.gen.dart';
 import 'package:unoapp/widgets/cards.dart';
@@ -22,7 +23,7 @@ class PopularSubcategoriesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double cardWidth = (MediaQuery.sizeOf(context).width - 32) / 2.3;
+    final double cardWidth = (context.screenWidth - 32) / 2.3;
 
     return Container(
       color: Colors.white,
