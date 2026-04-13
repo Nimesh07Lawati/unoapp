@@ -1,50 +1,141 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
 import 'package:unoapp/gen/colors.gen.dart';
 import 'package:unoapp/gen/assets.gen.dart';
 
+class GridViewArguments {
+  final String? title;
+  final String? category;
+  final String? searchQuery;
+  final int? minPrice;
+  final int? maxPrice;
+  final Map<String, dynamic>? additionalData;
+
+  GridViewArguments({
+    this.title,
+    this.category,
+    this.searchQuery,
+    this.minPrice,
+    this.maxPrice,
+    this.additionalData,
+  });
+
+  factory GridViewArguments.fromMap(Map<String, dynamic> map) {
+    return GridViewArguments(
+      title: map['title'] as String?,
+      category: map['category'] as String?,
+      searchQuery: map['searchQuery'] as String?,
+      minPrice: map['minPrice'] as int?,
+      maxPrice: map['maxPrice'] as int?,
+      additionalData: map['additionalData'] as Map<String, dynamic>?,
+    );
+  }
+}
+
 class GridViewScreencards extends StatelessWidget {
-  GridViewScreencards({super.key});
+  const GridViewScreencards({super.key});
 
-  final int resultsCount = 86;
-  final String searchQuery = 'Wedding';
+  // Method to extract arguments safely
+  Map<String, dynamic>? get _args {
+    try {
+      return Get.arguments as Map<String, dynamic>?;
+    } catch (e) {
+      debugPrint('Error parsing arguments: $e');
+      return null;
+    }
+  }
 
-  // Define rental items using generated assets
-  final List<RentalItem> rentalItems = [
-    RentalItem(
-      title: 'Luxury Wedding Venue',
-      subcategory: 'Event Space',
-      price: 'From 499',
-      location: 'Kathmandu, Nepal',
-      image: Assets.applicationImages.wedding, // Using generated asset
-    ),
-    RentalItem(
-      title: 'Luxury Car Rental',
-      subcategory: 'Transportation',
-      price: 'From 299',
-      location: 'Lalitpur, Nepal',
-      image: Assets.applicationImages.girlInCar, // Using generated asset
-    ),
-    RentalItem(
-      title: 'Luxury Car Rental',
-      subcategory: 'Transportation',
-      price: 'From 299',
-      location: 'Lalitpur, Nepal',
-      image: Assets.applicationImages.girlInCar, // Using generated asset
-    ),
-    RentalItem(
-      title: 'Luxury Car Rental',
-      subcategory: 'Transportation',
-      price: 'From 299',
-      location: 'Lalitpur, Nepal',
-      image: Assets.applicationImages.girlInCar, // Using generated asset
-    ),
-  ];
+  // Helper getters for common arguments
+  String get _title {
+    if (_args != null && _args!.containsKey('title')) {
+      return _args!['title'].toString();
+    }
+    return 'Featured Items'; // Default value
+  }
+
+  String get _searchQuery {
+    if (_args != null && _args!.containsKey('searchQuery')) {
+      return _args!['searchQuery'].toString();
+    }
+    if (_args != null && _args!.containsKey('title')) {
+      return _args!['title'].toString();
+    }
+    return 'Featured'; // Default value
+  }
+
+  int get resultsCount {
+    // This could be dynamic based on category
+    if (_args != null && _args!.containsKey('category')) {
+      // Different counts for different categories
+      switch (_args!['category']) {
+        case 'party_hire':
+          return 42;
+        case 'popular':
+          return 86;
+        default:
+          return 24;
+      }
+    }
+    return 86; // Default
+  }
+
+  // Define rental items based on arguments
+  List<RentalItem> get rentalItems {
+    // You can filter or change items based on arguments
+    final category = _args?['category'];
+
+    if (category == 'party_hire') {
+      return [
+        RentalItem(
+          title: 'Luxury Yacht Experience',
+          subcategory: 'Venues',
+          price: 'From 499',
+          location: 'Gold Coast',
+          image: Assets.images.yacht,
+        ),
+        RentalItem(
+          title: 'Premium Photo Booth',
+          subcategory: 'Entertainment',
+          price: 'From 79',
+          location: 'Robina',
+          image: Assets.images.productCamera,
+        ),
+        // Add more items specific to party hire
+      ];
+    }
+
+    // Default items
+    return [
+      RentalItem(
+        title: _args?['title'] ?? 'Luxury Wedding Venue',
+        subcategory: _args?['subcategory'] ?? 'Event Space',
+        price: _args?['price'] != null ? 'From ${_args!['price']}' : 'From 499',
+        location: _args?['location'] ?? 'Kathmandu, Nepal',
+        image: Assets.applicationImages.wedding,
+      ),
+      RentalItem(
+        title: 'Luxury Car Rental',
+        subcategory: 'Transportation',
+        price: 'From 299',
+        location: 'Lalitpur, Nepal',
+        image: Assets.applicationImages.girlInCar,
+      ),
+      RentalItem(
+        title: 'Premium Sound System',
+        subcategory: 'Audio & Music',
+        price: 'From 99',
+        location: 'Surfers Paradise',
+        image: Assets.images.productCamera,
+      ),
+    ];
+  }
 
   void _handleBack(BuildContext context) {
     debugPrint('back button pressed');
-    context.pop();
+    // You can pass data back if needed
+    // Get.back(result: {'navigatedBack': true});
+    Get.back();
   }
 
   @override
@@ -74,11 +165,10 @@ class GridViewScreencards extends StatelessWidget {
                     ),
                     width: double.infinity,
                     child: Text(
-                      '$resultsCount Results For “$searchQuery”',
+                      '$resultsCount Results For “$_searchQuery”',
                       style: AppTextStyles.childPageHeader,
                     ),
                   ),
-
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -101,7 +191,6 @@ class GridViewScreencards extends StatelessWidget {
                 ],
               ),
             ),
-
             Positioned(
               top: 56,
               left: 24,
@@ -166,7 +255,6 @@ class GridViewScreencards extends StatelessWidget {
               ),
             ),
           ),
-
           Expanded(
             flex: 4,
             child: Padding(
@@ -180,19 +268,15 @@ class GridViewScreencards extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-
                   const SizedBox(height: 4),
-
                   Text(item.subcategory, style: AppTextStyles.cardSubtitle),
-
                   const SizedBox(height: 4),
-
                   Row(
                     children: [
                       const Icon(
                         Icons.location_on,
                         size: 12,
-                        color: Color(0xFF9E9E9E), // Using consistent color
+                        color: Color(0xFF9E9E9E),
                       ),
                       const SizedBox(width: 4),
                       Expanded(
@@ -205,9 +289,7 @@ class GridViewScreencards extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   const Spacer(),
-
                   Text(item.price, style: AppTextStyles.priceLabel),
                 ],
               ),
@@ -219,13 +301,12 @@ class GridViewScreencards extends StatelessWidget {
   }
 }
 
-// Create a model for rental items
 class RentalItem {
   final String title;
   final String subcategory;
   final String price;
   final String location;
-  final AssetGenImage image; // Using generated type from flutter_gen
+  final AssetGenImage image;
 
   RentalItem({
     required this.title,

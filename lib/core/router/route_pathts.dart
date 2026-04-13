@@ -1,4 +1,4 @@
-// lib/core/router/route_paths.dart
+// lib/core/router/route_paths.dart (optional - for backward compatibility)
 class RoutePaths {
   static const home = '/home';
   static const categories = '/categories';
