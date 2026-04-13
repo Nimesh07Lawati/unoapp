@@ -36,7 +36,6 @@ class GridViewArguments {
 class GridViewScreencards extends StatelessWidget {
   const GridViewScreencards({super.key});
 
-  // Method to extract arguments safely
   Map<String, dynamic>? get _args {
     try {
       return Get.arguments as Map<String, dynamic>?;
@@ -46,14 +45,6 @@ class GridViewScreencards extends StatelessWidget {
     }
   }
 
-  // Helper getters for common arguments
-  String get _title {
-    if (_args != null && _args!.containsKey('title')) {
-      return _args!['title'].toString();
-    }
-    return 'Featured Items'; // Default value
-  }
-
   String get _searchQuery {
     if (_args != null && _args!.containsKey('searchQuery')) {
       return _args!['searchQuery'].toString();
@@ -61,28 +52,18 @@ class GridViewScreencards extends StatelessWidget {
     if (_args != null && _args!.containsKey('title')) {
       return _args!['title'].toString();
     }
-    return 'Featured'; // Default value
+    return 'Featured';
   }
 
+  //  reads itemsCount from arguments passed by each section
   int get resultsCount {
-    // This could be dynamic based on category
-    if (_args != null && _args!.containsKey('category')) {
-      // Different counts for different categories
-      switch (_args!['category']) {
-        case 'party_hire':
-          return 42;
-        case 'popular':
-          return 86;
-        default:
-          return 24;
-      }
+    if (_args != null && _args!.containsKey('itemsCount')) {
+      return _args!['itemsCount'] as int;
     }
-    return 86; // Default
+    return 24; // fallback
   }
 
-  // Define rental items based on arguments
   List<RentalItem> get rentalItems {
-    // You can filter or change items based on arguments
     final category = _args?['category'];
 
     if (category == 'party_hire') {
@@ -101,7 +82,32 @@ class GridViewScreencards extends StatelessWidget {
           location: 'Robina',
           image: Assets.images.productCamera,
         ),
-        // Add more items specific to party hire
+      ];
+    }
+
+    if (category == 'sub_categories') {
+      return [
+        RentalItem(
+          title: 'Fairy Lights',
+          subcategory: 'Lighting & Decor',
+          price: 'From 49',
+          location: 'Broadbeach',
+          image: Assets.images.party,
+        ),
+        RentalItem(
+          title: 'Skateboard',
+          subcategory: 'Outdoors',
+          price: 'From 29',
+          location: 'Surfers Paradise',
+          image: Assets.images.skateboard,
+        ),
+        RentalItem(
+          title: 'Sound Hiring',
+          subcategory: 'Audio & Music',
+          price: 'From 99',
+          location: 'Robina',
+          image: Assets.images.audioMixer,
+        ),
       ];
     }
 
@@ -132,9 +138,6 @@ class GridViewScreencards extends StatelessWidget {
   }
 
   void _handleBack(BuildContext context) {
-    debugPrint('back button pressed');
-    // You can pass data back if needed
-    // Get.back(result: {'navigatedBack': true});
     Get.back();
   }
 
@@ -158,14 +161,14 @@ class GridViewScreencards extends StatelessWidget {
                   Container(
                     color: ColorName.applicationBackgroundColor,
                     padding: const EdgeInsets.only(
-                      top: 80,
+                      top: 60,
                       left: 24,
                       right: 24,
                       bottom: 20,
                     ),
                     width: double.infinity,
                     child: Text(
-                      '$resultsCount Results For “$_searchQuery”',
+                      '$resultsCount Results For "$_searchQuery"',
                       style: AppTextStyles.childPageHeader,
                     ),
                   ),

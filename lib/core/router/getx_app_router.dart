@@ -11,68 +11,41 @@ import 'package:unoapp/features/home/presentation/home_screen.dart';
 import 'package:unoapp/features/search/search_screen.dart';
 
 class GetxAppRoutes {
-  // Initial route
   static const initialRoute = RouteNames.home;
 
-  // GetX route configuration
   static final List<GetPage> routes = [
-    // Shell/Main Layout Route
+    // Each shell route wraps its screen in MainShell directly
     GetPage(
-      name: RouteNames.mainShell,
-      page: () => MainShell(child: const SizedBox.shrink()),
-      participatesInRootNavigator: true,
-      preventDuplicates: true,
-      children: [
-        // Nested routes within MainShell
-        GetPage(
-          name: RouteNames.home,
-          page: () => const HomeScreen(),
-          transition: Transition.noTransition,
-          participatesInRootNavigator: false,
-        ),
-        GetPage(
-          name: RouteNames.categories,
-          page: () => const CategoriesScreen(),
-          transition: Transition.noTransition,
-          participatesInRootNavigator: false,
-        ),
-        GetPage(
-          name: RouteNames.search,
-          page: () => const SearchScreen(),
-          transition: Transition.noTransition,
-          participatesInRootNavigator: false,
-        ),
-        GetPage(
-          name: RouteNames.booking,
-          page: () => const BookingScreen(),
-          transition: Transition.noTransition,
-          participatesInRootNavigator: false,
-        ),
-        GetPage(
-          name: RouteNames.chat,
-          page: () => const ChatScreen(),
-          transition: Transition.noTransition,
-          participatesInRootNavigator: false,
-        ),
-      ],
+      name: RouteNames.home,
+      page: () => const MainShell(child: HomeScreen()),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: RouteNames.categories,
+      page: () => const MainShell(child: CategoriesScreen()),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: RouteNames.search,
+      page: () => const MainShell(child: SearchScreen()),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: RouteNames.booking,
+      page: () => const MainShell(child: BookingScreen()),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: RouteNames.chat,
+      page: () => const MainShell(child: ChatScreen()),
+      transition: Transition.noTransition,
     ),
 
-    // Independent routes (not in shell)
+    // Independent route — no shell
     GetPage(
       name: RouteNames.gridCards,
       page: () => GridViewScreencards(),
       transition: Transition.noTransition,
-      participatesInRootNavigator: true,
     ),
   ];
-
-  // Helper method to get route path with parameters
-  static String getRoutePath(String routeName, {Map<String, String>? params}) {
-    if (params == null || params.isEmpty) return routeName;
-
-    final queryString = params.entries
-        .map((e) => '${e.key}=${e.value}')
-        .join('&');
-    return '$routeName?$queryString';
-  }
 }

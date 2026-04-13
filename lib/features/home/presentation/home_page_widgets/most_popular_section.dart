@@ -105,8 +105,8 @@ class MostPopularSection extends StatelessWidget {
                   'minPrice': 0,
                   'maxPrice': 99,
                   'itemsCount': popularItems.length,
-                  'searchQuery': 'Party Hire',
-                  'section': 'party_hire',
+                  'searchQuery': 'Most Popular',
+                  'section': 'Most Popular',
                 },
               );
             },
