@@ -20,6 +20,22 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_gen_runner: ^5.13.0+1
   build_runner: ^2.13.1
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/application_images/rentsy_logo.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#D42B65"  
+  adaptive_icon_foreground: "assets/application_images/rentsy_logo.png"
+  adaptive_icon_foreground_scale: 0.65
+  web:
+    generate: false
+  windows:
+    generate: false
+  macos:
+    generate: false  
 
 flutter:
   uses-material-design: true
