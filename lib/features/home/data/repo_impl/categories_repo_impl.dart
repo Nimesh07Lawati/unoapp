@@ -13,6 +13,7 @@ class CategoryRepositoryImpl implements CategoryRepository {
   Future<Either<Failure, List<CategoryEntity>>> getCategories() async {
     try {
       final categories = await remoteDataSource.fetchCategories();
+      //final categories = await remoteDataSource.fetchEmptyCategories();
       return Right(categories);
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));

@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:unoapp/core/network/api_end_points.dart';
 import 'package:unoapp/features/home/data/model/categories_model.dart';
 
 abstract class CategoryRemoteDataSource {
   Future<List<CategoryModel>> fetchCategories();
+
+  // this is the method to fetch empty categories, used for testing purposes only, to be removed later
+  Future<List<CategoryModel>> fetchEmptyCategories();
 }
 
 class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
@@ -12,9 +16,7 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
 
   @override
   Future<List<CategoryModel>> fetchCategories() async {
-    final response = await dio.get(
-      'https://rentsy.com.au/api/customer/categories',
-    );
+    final response = await dio.get(ApiEndPoints.getAllCategories);
 
     if (response.statusCode == 200) {
       final data = response.data;
@@ -25,5 +27,11 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
     } else {
       throw Exception('Failed to load categories');
     }
+  }
+
+  // This method is for testing purposes only, to be removed later
+  @override
+  Future<List<CategoryModel>> fetchEmptyCategories() async {
+    return [];
   }
 }
