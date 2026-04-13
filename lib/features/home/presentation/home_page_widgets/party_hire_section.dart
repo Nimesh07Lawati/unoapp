@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:unoapp/core/extensions/context_extensions.dart';
 import 'package:unoapp/core/router/route_name.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
@@ -45,6 +44,22 @@ class PartyHireSection extends StatelessWidget {
       location: 'Robina',
       image: Assets.images.productCamera,
     ),
+    PartyItem(
+      title: 'Event Decor',
+      discount: '28% OFF',
+      price: '199',
+      subcategory: 'Decoration',
+      location: 'Broadbeach',
+      image: Assets.applicationImages.diningHall,
+    ),
+    PartyItem(
+      title: 'Catering Service',
+      discount: '12% OFF',
+      price: '349',
+      subcategory: 'Food & Beverage',
+      location: 'Surfers Paradise',
+      image: Assets.applicationImages.wedding,
+    ),
   ];
 
   @override
@@ -85,7 +100,21 @@ class PartyHireSection extends StatelessWidget {
             style: AppTextStyles.sectionLabelLeft,
           ),
           GestureDetector(
-            onTap: () => Get.toNamed(RouteNames.gridCards),
+            onTap: () {
+              // Navigate to grid view with all party items
+              Get.toNamed(
+                RouteNames.gridCards,
+                arguments: {
+                  'title': 'Party Hire Under \$99',
+                  'category': 'party_hire',
+                  'minPrice': 0,
+                  'maxPrice': 99,
+                  'itemsCount': partyItems.length,
+                  'searchQuery': 'Party Hire',
+                  'section': 'party_hire',
+                },
+              );
+            },
             child: Container(
               width: 32,
               height: 32,
@@ -111,14 +140,39 @@ class PartyHireSection extends StatelessWidget {
   }
 
   Widget _buildCard(PartyItem item, double cardWidth) {
-    return HireCard.product(
-      image: item.image,
-      width: cardWidth,
-      title: item.title,
-      discount: item.discount,
-      price: item.price,
-      subcategory: item.subcategory,
-      location: item.location,
+    return GestureDetector(
+      onTap: () {
+        // Navigate to grid view with specific party item details
+        Get.toNamed(
+          RouteNames.gridCards,
+          arguments: {
+            'title': item.title,
+            'discount': item.discount,
+            'price': item.price,
+            'subcategory': item.subcategory,
+            'location': item.location,
+            'category': 'party_item',
+            'searchQuery': item.title,
+            'priceRange': 'Under \$99',
+            'itemDetails': {
+              'title': item.title,
+              'discount': item.discount,
+              'price': item.price,
+              'subcategory': item.subcategory,
+              'location': item.location,
+            },
+          },
+        );
+      },
+      child: HireCard.product(
+        image: item.image,
+        width: cardWidth,
+        title: item.title,
+        discount: item.discount,
+        price: item.price,
+        subcategory: item.subcategory,
+        location: item.location,
+      ),
     );
   }
 }

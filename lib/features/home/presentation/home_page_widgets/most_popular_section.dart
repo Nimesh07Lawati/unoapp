@@ -95,7 +95,21 @@ class MostPopularSection extends StatelessWidget {
             ],
           ),
           GestureDetector(
-            onTap: () => Get.toNamed(RouteNames.booking),
+            onTap: () {
+              // Navigate to grid view with all party items
+              Get.toNamed(
+                RouteNames.gridCards,
+                arguments: {
+                  'title': 'Most Popular Items',
+                  'category': 'Most Popular',
+                  'minPrice': 0,
+                  'maxPrice': 99,
+                  'itemsCount': popularItems.length,
+                  'searchQuery': 'Party Hire',
+                  'section': 'party_hire',
+                },
+              );
+            },
             child: Container(
               width: 32,
               height: 32,

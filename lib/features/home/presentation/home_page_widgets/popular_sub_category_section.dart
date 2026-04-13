@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:unoapp/core/extensions/context_extensions.dart';
 import 'package:unoapp/core/router/route_name.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
@@ -61,7 +60,21 @@ class PopularSubcategoriesSection extends StatelessWidget {
             style: AppTextStyles.sectionLabelLeft,
           ),
           GestureDetector(
-            onTap: () => Get.toNamed(RouteNames.categories),
+            onTap: () {
+              // Navigate to grid view with all party items
+              Get.toNamed(
+                RouteNames.gridCards,
+                arguments: {
+                  'title': 'Sub category Items',
+                  'category': 'sub_categories',
+                  'minPrice': 0,
+                  'maxPrice': 99,
+                  'itemsCount': subcategories.length,
+                  'searchQuery': 'sub categories',
+                  'section': 'sub_categories',
+                },
+              );
+            },
             child: Container(
               width: 32,
               height: 32,

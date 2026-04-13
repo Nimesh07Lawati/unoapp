@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:unoapp/core/extensions/context_extensions.dart';
 import 'package:unoapp/core/router/route_name.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';

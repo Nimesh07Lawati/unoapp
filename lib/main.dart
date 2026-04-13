@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'UnoApp',
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
 
       // Routing configuration
       initialRoute: GetxAppRoutes.initialRoute,
