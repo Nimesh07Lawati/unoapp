@@ -13,6 +13,9 @@ dependencies:
   flutter_svg: ^2.0.10
   flutter_gen: ^5.13.0+1
   get: ^4.6.6
+  dio: ^5.9.2
+  dartz: ^0.10.1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

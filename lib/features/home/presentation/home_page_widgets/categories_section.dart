@@ -1,95 +1,59 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:unoapp/controller/shimmering_effect_controller.dart';
 import 'package:unoapp/core/extensions/context_extensions.dart';
 import 'package:unoapp/features/home/presentation/home_page_styling/app_text_style.dart';
-import 'package:unoapp/gen/assets.gen.dart';
+import 'package:unoapp/features/home/presentation/home_page_widgets/controllers/categories_section_controller.dart';
 
-class CategoriesSection extends StatefulWidget {
+class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
 
   @override
-  State<CategoriesSection> createState() => _CategoriesSectionState();
-}
-
-class _CategoriesSectionState extends State<CategoriesSection>
-    with SingleTickerProviderStateMixin {
-  bool _isLoading = true;
-  late AnimationController _shimmerController;
-  late Animation<double> _shimmerAnimation;
-
-  static final List<CategoryItem> categories = [
-    CategoryItem(name: 'Party+Events', image: Assets.applicationImages.car),
-    CategoryItem(name: 'Wedding', image: Assets.applicationImages.dateTable),
-    CategoryItem(
-      name: 'Automotive',
-      image: Assets.applicationImages.diningHall,
-    ),
-    CategoryItem(name: 'Outdoors', image: Assets.applicationImages.tools),
-    CategoryItem(name: 'Tools', image: Assets.applicationImages.waterSports),
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-
-    _shimmerController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    )..repeat();
-
-    _shimmerAnimation = Tween<double>(begin: -1.5, end: 1.5).animate(
-      CurvedAnimation(parent: _shimmerController, curve: Curves.easeInOut),
-    );
-
-    Future.delayed(const Duration(seconds: 5), () {
-      if (mounted) {
-        setState(() => _isLoading = false);
-        _shimmerController.stop();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _shimmerController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final categoryController = Get.find<CategoryController>();
+    final shimmerController = Get.put(ShimmerController());
+
     const double horizontalPadding = 32;
     final double itemWidth = (context.screenWidth - horizontalPadding) / 4.1;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 100,
-          child: _isLoading
-              ? _buildShimmerList(itemWidth)
-              : categories.isEmpty
-              ? _buildEmptyState()
-              : _buildCategoryList(itemWidth),
-        ),
+        Obx(() {
+          if (categoryController.isLoading.value) {
+            return SizedBox(
+              height: 100,
+              child: _buildShimmerList(shimmerController, itemWidth),
+            );
+          } else if (categoryController.categories.isEmpty) {
+            return const SizedBox.shrink();
+          } else {
+            return SizedBox(
+              height: 100,
+              child: _buildCategoryList(categoryController, itemWidth),
+            );
+          }
+        }),
       ],
     );
   }
 
-  // ── Shimmer ───────────────────────────────────────────────────
-  Widget _buildShimmerList(double itemWidth) {
+  Widget _buildShimmerList(ShimmerController controller, double itemWidth) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       physics: const NeverScrollableScrollPhysics(),
       itemCount: 5,
-      itemBuilder: (context, index) => _buildShimmerCard(itemWidth),
+      itemBuilder: (context, index) => _buildShimmerCard(controller, itemWidth),
     );
   }
 
-  Widget _buildShimmerCard(double itemWidth) {
+  Widget _buildShimmerCard(ShimmerController controller, double itemWidth) {
     final double circleSize = itemWidth * 0.70;
 
     return AnimatedBuilder(
-      animation: _shimmerAnimation,
+      animation: controller.shimmerAnimation,
       builder: (context, child) {
         return SizedBox(
           width: itemWidth,
@@ -110,9 +74,9 @@ class _CategoriesSectionState extends State<CategoriesSection>
                       Color(0xFFE0E0E0),
                     ],
                     stops: [
-                      (_shimmerAnimation.value - 0.5).clamp(0.0, 1.0),
-                      (_shimmerAnimation.value).clamp(0.0, 1.0),
-                      (_shimmerAnimation.value + 0.5).clamp(0.0, 1.0),
+                      (controller.shimmerAnimation.value - 0.5).clamp(0.0, 1.0),
+                      (controller.shimmerAnimation.value).clamp(0.0, 1.0),
+                      (controller.shimmerAnimation.value + 0.5).clamp(0.0, 1.0),
                     ],
                   ),
                 ),
@@ -132,9 +96,9 @@ class _CategoriesSectionState extends State<CategoriesSection>
                       Color(0xFFE0E0E0),
                     ],
                     stops: [
-                      (_shimmerAnimation.value - 0.5).clamp(0.0, 1.0),
-                      (_shimmerAnimation.value).clamp(0.0, 1.0),
-                      (_shimmerAnimation.value + 0.5).clamp(0.0, 1.0),
+                      (controller.shimmerAnimation.value - 0.5).clamp(0.0, 1.0),
+                      (controller.shimmerAnimation.value).clamp(0.0, 1.0),
+                      (controller.shimmerAnimation.value + 0.5).clamp(0.0, 1.0),
                     ],
                   ),
                 ),
@@ -146,19 +110,21 @@ class _CategoriesSectionState extends State<CategoriesSection>
     );
   }
 
-  // ── Loaded ────────────────────────────────────────────────────
-  Widget _buildCategoryList(double itemWidth) {
+  Widget _buildCategoryList(CategoryController controller, double itemWidth) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       physics: const BouncingScrollPhysics(),
-      itemCount: categories.length,
-      itemBuilder: (context, index) =>
-          _buildCategoryCard(categories[index], itemWidth),
+      itemCount: controller.categories.length,
+      itemBuilder: (context, index) => _buildCategoryCard(
+        controller.categories[index].imgName,
+        controller.categories[index].name,
+        itemWidth,
+      ),
     );
   }
 
-  Widget _buildCategoryCard(CategoryItem category, double itemWidth) {
+  Widget _buildCategoryCard(String imgUrl, String name, double itemWidth) {
     final double circleSize = itemWidth * 0.70;
 
     return SizedBox(
@@ -179,11 +145,25 @@ class _CategoriesSectionState extends State<CategoriesSection>
                 ),
               ],
             ),
-            child: ClipOval(child: category.image.image(fit: BoxFit.cover)),
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: imgUrl,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    Container(color: const Color(0xFFE0E0E0)),
+                errorWidget: (context, url, error) => Container(
+                  color: const Color(0xFFE0E0E0),
+                  child: const Icon(
+                    Icons.image_not_supported,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
           ),
           const SizedBox(height: 8),
           Text(
-            category.name,
+            name,
             style: AppTextStyles.texts,
             textAlign: TextAlign.center,
             maxLines: 1,
@@ -193,26 +173,4 @@ class _CategoriesSectionState extends State<CategoriesSection>
       ),
     );
   }
-
-  // ── Empty State ───────────────────────────────────────────────
-  Widget _buildEmptyState() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'No categories available',
-            style: AppTextStyles.texts.copyWith(color: Colors.grey.shade400),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoryItem {
-  final String name;
-  final AssetGenImage image;
-
-  CategoryItem({required this.name, required this.image});
 }

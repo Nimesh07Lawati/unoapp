@@ -1,5 +1,3 @@
-// lib/core/router/getx_app_routes.dart
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unoapp/application_shell/main_shell.dart';
 import 'package:unoapp/core/router/route_name.dart';
@@ -7,6 +5,7 @@ import 'package:unoapp/features/booking/booking_screen.dart';
 import 'package:unoapp/features/categories/categories_screen.dart';
 import 'package:unoapp/features/chat/chat_screen.dart';
 import 'package:unoapp/features/home/presentation/home_page_child_screen/grid_view_screen_cards.dart';
+import 'package:unoapp/features/home/presentation/home_page_widgets/bindings/category_binding.dart';
 import 'package:unoapp/features/home/presentation/home_screen.dart';
 import 'package:unoapp/features/search/search_screen.dart';
 
@@ -19,6 +18,7 @@ class GetxAppRoutes {
       name: RouteNames.home,
       page: () => const MainShell(child: HomeScreen()),
       transition: Transition.noTransition,
+      binding: CategoryBinding(),
     ),
     GetPage(
       name: RouteNames.categories,
