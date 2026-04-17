@@ -26,6 +26,8 @@ class CategoriesSection extends StatelessWidget {
               height: 100,
               child: _buildShimmerList(shimmerController, itemWidth),
             );
+          } else if (categoryController.hasError.value) {
+            return _buildErrorState(categoryController);
           } else if (categoryController.categories.isEmpty) {
             return const SizedBox.shrink();
           } else {
@@ -36,6 +38,87 @@ class CategoriesSection extends StatelessWidget {
           }
         }),
       ],
+    );
+  }
+
+  Widget _buildErrorState(CategoryController controller) {
+    final errorType = controller.errorType.value;
+
+    final (IconData icon, String title, String subtitle) = switch (errorType) {
+      ErrorType.network => (
+        Icons.wifi_off_rounded,
+        'No internet connection',
+        'Check your connection and try again',
+      ),
+      ErrorType.timeout => (
+        Icons.timer_off_rounded,
+        'Request timed out',
+        'The server took too long to respond',
+      ),
+      ErrorType.unknown || null => (
+        Icons.error_outline_rounded,
+        'Something went wrong',
+        'Unable to load categories',
+      ),
+    };
+
+    return SizedBox(
+      height: 100,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          children: [
+            Icon(icon, size: 32, color: Colors.grey.shade400),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: AppTextStyles.texts.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade700,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: AppTextStyles.texts.copyWith(
+                      fontSize: 11,
+                      color: Colors.grey.shade500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            GestureDetector(
+              onTap: controller.fetchCategories,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.grey.shade300),
+                ),
+                child: Text(
+                  'Retry',
+                  style: AppTextStyles.texts.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey.shade700,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

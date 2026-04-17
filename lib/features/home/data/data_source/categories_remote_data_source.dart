@@ -17,16 +17,11 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
   @override
   Future<List<CategoryModel>> fetchCategories() async {
     final response = await dio.get(ApiEndPoints.getAllCategories);
-
-    if (response.statusCode == 200) {
-      final data = response.data;
-      final List categoriesJson = data['data']['categories'] as List;
-      return categoriesJson
-          .map((json) => CategoryModel.fromJson(json as Map<String, dynamic>))
-          .toList();
-    } else {
-      throw Exception('Failed to load categories');
-    }
+    // Dio automatically throws an error if statusCode is not 200-299
+    final List categoriesJson = response.data['data']['categories'] as List;
+    return categoriesJson
+        .map((json) => CategoryModel.fromJson(json as Map<String, dynamic>))
+        .toList();
   }
 
   // This method is for testing purposes only, to be removed later

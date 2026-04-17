@@ -2,7 +2,7 @@ import 'package:unoapp/features/home/domain/entity/categories_entity.dart';
 
 class CategoryModel extends CategoryEntity {
   const CategoryModel({
-    required super.id,
+    required super.id, // so we are declaring this in super because it is already declared in the entity
     required super.name,
     required super.imgName,
   });
